@@ -193,7 +193,9 @@ listItem
     ;
 
 aisInitializer
-    : fieldInitializer
+    : listInitializer
+    | expression
+    | arrayInitializer
     | tableItemInitializer
     ;
 
@@ -324,47 +326,31 @@ enumType
 
 /*RIIF-2: ANTlr.4 expression (Same with JAVA)*/
 expression
-    : primary
-    | ('+'|'-') expression
-    | ('~'|'!') expression
-    | expression ( '*' | '/' | '%' ) expression
-    | expression ( '-' | '+' ) expression
-    | expression ('<' '<' | '>' '>' '>' | '>' '>') expression
-    | expression ('<=' | '>=' | '>' | '<') expression
-    | expression ('==' | '!=') expression
-    | expression '&' expression
-    | expression '^' expression
-    | expression '|' expression
-    | expression '&&' expression
-    | expression '||' expression
-    | expression '?' expression ':' expression
-    | <assoc=right> expression
-      (   '='
-      |   '+='
-      |   '-='
-      |   '*='
-      |   '/='
-      |   '&='
-      |   '|='
-      |   '^='
-      |   '>>='
-      |   '>>>='
-      |   '<<='
-      |   '%='
-      )
-      expression
+    : primary   #expPrimary
+    | ('+'|'-') expression  #expPositiveOrNegative
+    | ('~'|'!') expression  #expWaveOrNot
+    | expression ( '*' | '/' | '%' ) expression #expStarOrDivOrMod
+    | expression ( '-' | '+' ) expression   #expMinusOrPlus
+    | expression ('<=' | '>=' | '>' | '<') expression #expCmp
+    | expression ('==' | '!=') expression #expEqOrNotEq
+    | expression '&' expression #expSingleAnd
+    | expression '^' expression #expPower
+    | expression '|' expression #expSingleOr
+    | expression '&&' expression #expDoubleAnd
+    | expression '||' expression #expDoubleOr
+    | expression '?' expression ':' expression #expIfElse
+    | <assoc=right> expression '=' expression #expAssign
     ;
 
 primary
-    : '(' expression ')'
-    | SELF
-    | Identifier
-    | TRUE
-    | FALSE
-    | aisDeclaratorId
-    | literal
-    | funcCall
-    | arrayInitializer
+    : '(' expression ')' #primaryParenthese
+    | SELF  #primarySelf
+    | TRUE  #primaryTrue
+    | FALSE #primaryFalse
+    | aisDeclaratorId   #primaryAIS
+    | literal   #primaryLiteral
+    | funcCall  #primaryFuncCall
+    | arrayInitializer  #primaryArrayInitializer
     ;
 
 funcCall

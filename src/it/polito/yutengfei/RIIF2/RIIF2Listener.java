@@ -608,25 +608,269 @@ public interface RIIF2Listener extends ParseTreeListener {
 	 */
 	void exitEnumType(RIIF2Parser.EnumTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link RIIF2Parser#expression}.
+	 * Enter a parse tree produced by the {@code expCmp}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression(RIIF2Parser.ExpressionContext ctx);
+	void enterExpCmp(RIIF2Parser.ExpCmpContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link RIIF2Parser#expression}.
+	 * Exit a parse tree produced by the {@code expCmp}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression(RIIF2Parser.ExpressionContext ctx);
+	void exitExpCmp(RIIF2Parser.ExpCmpContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link RIIF2Parser#primary}.
+	 * Enter a parse tree produced by the {@code expPrimary}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrimary(RIIF2Parser.PrimaryContext ctx);
+	void enterExpPrimary(RIIF2Parser.ExpPrimaryContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link RIIF2Parser#primary}.
+	 * Exit a parse tree produced by the {@code expPrimary}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrimary(RIIF2Parser.PrimaryContext ctx);
+	void exitExpPrimary(RIIF2Parser.ExpPrimaryContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expEqOrNotEq}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpEqOrNotEq(RIIF2Parser.ExpEqOrNotEqContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expEqOrNotEq}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpEqOrNotEq(RIIF2Parser.ExpEqOrNotEqContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expIfElse}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpIfElse(RIIF2Parser.ExpIfElseContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expIfElse}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpIfElse(RIIF2Parser.ExpIfElseContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expDoubleOr}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpDoubleOr(RIIF2Parser.ExpDoubleOrContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expDoubleOr}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpDoubleOr(RIIF2Parser.ExpDoubleOrContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expPositiveOrNegative}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpPositiveOrNegative(RIIF2Parser.ExpPositiveOrNegativeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expPositiveOrNegative}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpPositiveOrNegative(RIIF2Parser.ExpPositiveOrNegativeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expAssign}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpAssign(RIIF2Parser.ExpAssignContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expAssign}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpAssign(RIIF2Parser.ExpAssignContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expSingleOr}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpSingleOr(RIIF2Parser.ExpSingleOrContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expSingleOr}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpSingleOr(RIIF2Parser.ExpSingleOrContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expPower}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpPower(RIIF2Parser.ExpPowerContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expPower}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpPower(RIIF2Parser.ExpPowerContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expMinusOrPlus}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpMinusOrPlus(RIIF2Parser.ExpMinusOrPlusContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expMinusOrPlus}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpMinusOrPlus(RIIF2Parser.ExpMinusOrPlusContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expDoubleAnd}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpDoubleAnd(RIIF2Parser.ExpDoubleAndContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expDoubleAnd}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpDoubleAnd(RIIF2Parser.ExpDoubleAndContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expSingleAnd}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpSingleAnd(RIIF2Parser.ExpSingleAndContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expSingleAnd}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpSingleAnd(RIIF2Parser.ExpSingleAndContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expWaveOrNot}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpWaveOrNot(RIIF2Parser.ExpWaveOrNotContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expWaveOrNot}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpWaveOrNot(RIIF2Parser.ExpWaveOrNotContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expStarOrDivOrMod}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpStarOrDivOrMod(RIIF2Parser.ExpStarOrDivOrModContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expStarOrDivOrMod}
+	 * labeled alternative in {@link RIIF2Parser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpStarOrDivOrMod(RIIF2Parser.ExpStarOrDivOrModContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code primaryParenthese}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryParenthese(RIIF2Parser.PrimaryParentheseContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code primaryParenthese}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryParenthese(RIIF2Parser.PrimaryParentheseContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code primarySelf}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimarySelf(RIIF2Parser.PrimarySelfContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code primarySelf}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimarySelf(RIIF2Parser.PrimarySelfContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code primaryTrue}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryTrue(RIIF2Parser.PrimaryTrueContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code primaryTrue}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryTrue(RIIF2Parser.PrimaryTrueContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code primaryFalse}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryFalse(RIIF2Parser.PrimaryFalseContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code primaryFalse}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryFalse(RIIF2Parser.PrimaryFalseContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code primaryAIS}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryAIS(RIIF2Parser.PrimaryAISContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code primaryAIS}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryAIS(RIIF2Parser.PrimaryAISContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code primaryLiteral}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryLiteral(RIIF2Parser.PrimaryLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code primaryLiteral}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryLiteral(RIIF2Parser.PrimaryLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code primaryFuncCall}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryFuncCall(RIIF2Parser.PrimaryFuncCallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code primaryFuncCall}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryFuncCall(RIIF2Parser.PrimaryFuncCallContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code primaryArrayInitializer}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryArrayInitializer(RIIF2Parser.PrimaryArrayInitializerContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code primaryArrayInitializer}
+	 * labeled alternative in {@link RIIF2Parser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryArrayInitializer(RIIF2Parser.PrimaryArrayInitializerContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link RIIF2Parser#funcCall}.
 	 * @param ctx the parse tree

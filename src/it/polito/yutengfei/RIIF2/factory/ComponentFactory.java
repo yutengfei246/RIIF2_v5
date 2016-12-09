@@ -19,6 +19,13 @@ public class ComponentFactory implements Factory {
     public static final int CONSTANT = 3;
     public static final int TYPE_ASSOCIATIVE = 20;
     public static final int TYPE_VECTOR = 21;
+    public static final int BOOLEAN = 4 ;
+    public static final int FLOAT = 5;
+    public static final int INTEGER = 6;
+    public static final int STRING = 7;
+    public static final int TIME = 8;
+    public static final int USER_DEFINED = 9;
+    public static final int ENUM = 10;
 
     private String currComponentIdentifier = null;
     private List<String> eXIdentifiers = null ;
@@ -34,6 +41,12 @@ public class ComponentFactory implements Factory {
     private boolean entityIsAttribute = false;
     private Boolean entityIsAssociativeIndex = false;
     private String entityAssociativeIndexIdentifier = NO_NAME;
+    private String entityTypeDefinedByUser = NO_NAME;
+    private List<String> entityEnumType = null;
+    private boolean entityIsList = false;
+    private boolean entityIsArray = false ;
+    private int entityVectorRight = NO_VALUE;
+    private int entityVectorLeft = NO_VALUE;
 
 
     //initialization: tell the component start to prepare component with no name
@@ -113,5 +126,40 @@ public class ComponentFactory implements Factory {
     public void setEntityIsAssociativeIndex(String identifier) {
         this.entityIsAssociativeIndex = true;
         this.entityAssociativeIndexIdentifier = identifier;
+    }
+
+    public void setEntityType(int type) {
+        this.entityType = type;
+    }
+
+    public void setEntityTypeDefinedByUser(String entityTypeDefinedByUser) {
+        this.entityTypeDefinedByUser = entityTypeDefinedByUser;
+    }
+
+    public void setEntityEnumType(String entityEnumType) {
+        if (this.entityEnumType == null)
+            this.entityEnumType = new ArrayList<>();
+        this.entityEnumType.add(entityEnumType);
+    }
+
+    public void prepareField(int fieldType) throws EntityPreparedException {
+
+    }
+
+    public boolean isEntityList() {
+        return this.entityIsList;
+    }
+
+    public boolean isArrayEntity() {
+        return this.entityIsArray;
+    }
+
+    public boolean isPrimitiveEntity() {
+        return primityEntity;
+    }
+
+    public void setEntityVector(int vecLeft, int vecRight) {
+        this.entityVectorLeft = vecLeft;
+        this.entityVectorRight = vecRight;
     }
 }

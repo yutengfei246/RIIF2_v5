@@ -6,7 +6,9 @@ import it.polito.yutengfei.RIIF2.factory.ComponentFactory;
 import it.polito.yutengfei.RIIF2.factory.EntityPreparedException;
 import it.polito.yutengfei.RIIF2.factory.Factory;
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.antlr.v4.tool.ast.TerminalAST;
 
 import java.util.List;
 
@@ -18,6 +20,9 @@ public class componentParser extends RIIF2BaseListener {
 
     private final RIIF2Parser parser;
     private ComponentFactory componentFactory = Factory.newComponentFactory();
+
+
+    private ParseTreeProperty<Expression>  expTree = new ParseTreeProperty<>();
 
     public componentParser(RIIF2Parser parser){
         this.parser = parser;
@@ -70,7 +75,7 @@ public class componentParser extends RIIF2BaseListener {
 
         if (parameter != null)
             try {
-                this.componentFactory.prepare(ComponentFactory.PARAMETER);
+                this.componentFactory.prepareField(ComponentFactory.PARAMETER);
             } catch (EntityPreparedException e) {
                 e.printStackTrace();
                 //TODO: exception
@@ -78,7 +83,7 @@ public class componentParser extends RIIF2BaseListener {
 
         if (constant != null)
             try {
-                this.componentFactory.prepare(ComponentFactory.CONSTANT);
+                this.componentFactory.prepareField(ComponentFactory.CONSTANT);
             } catch (EntityPreparedException e) {
                 e.printStackTrace();
                 //TODO: exception
@@ -108,6 +113,57 @@ public class componentParser extends RIIF2BaseListener {
     }
 
     @Override
+    public void exitLiteral(RIIF2Parser.LiteralContext ctx) {
+        TerminalNode StringToken = ctx.StringLiteral();
+        TerminalNode DecimalToken = ctx.DecimalLiteral();
+        TerminalNode FloatingToken = ctx.FloatingPointLiteral();
+
+        Expression expression = new Expression();
+
+        if(StringToken != null){
+            expression.setType(Expression.STRING);
+
+            String value = StringToken.getText();
+            expression.setValue(value);
+        }
+
+        if(DecimalToken != null){
+            expression.setType(Expression.INTEGER);
+
+            int value = Integer.valueOf( DecimalToken.getText() );
+            expression.setValue(value);
+        }
+
+        if(FloatingToken != null){
+            expression.setType(Expression.FLOAT);
+
+            float value = Float.valueOf( FloatingToken.getText() );
+            expression.setValue( value );
+        }
+
+        this.expTree.put(ctx,expression);
+    }
+
+
+    @Override
+    public void exitVector(RIIF2Parser.VectorContext ctx) {
+        RIIF2Parser.ExpressionContext expCtxLeft
+                = ctx.expression(0);
+
+        RIIF2Parser.ExpressionContext expCtxRight
+                = ctx.expression(1);
+
+
+        Expression expLeft = this.expTree.get(expCtxLeft);
+        Expression expRight = this.expTree.get(expCtxRight);
+
+        ParserRuleContext parentContext = ctx.getParent();
+
+        if(parentContext instanceof RIIF2Parser.TypeTypeContext)
+            this.componentFactory.setEntityVector(vecLeft,vecRight);
+    }
+
+    @Override
     public void enterAttributeIndex(RIIF2Parser.AttributeIndexContext ctx) {
         ParserRuleContext parentContext = ctx.getParent();
 
@@ -128,6 +184,62 @@ public class componentParser extends RIIF2BaseListener {
         }
     }
 
-    
+    @Override
+    public void enterPrimitiveType(RIIF2Parser.PrimitiveTypeContext ctx) {
 
+        if( ctx.TYPE_BOOLEAN() != null )
+            this.componentFactory.setEntityType(ComponentFactory.BOOLEAN);
+        if( ctx.TYPE_FLOAT() != null)
+            this.componentFactory.setEntityType(ComponentFactory.FLOAT);
+        if( ctx.TYPE_INTEGER() != null)
+            this.componentFactory.setEntityType(ComponentFactory.INTEGER);
+        if( ctx.TYPE_STRING() != null )
+            this.componentFactory.setEntityType(ComponentFactory.STRING);
+        if( ctx.TYPE_TIME() != null)
+            this.componentFactory.setEntityType(ComponentFactory.TIME);
+        if( ctx.Identifier() != null) {
+            this.componentFactory.setEntityType(ComponentFactory.USER_DEFINED);
+
+            String identifier = ctx.Identifier().getText();
+            this.componentFactory.setEntityTypeDefinedByUser( identifier );
+        }
+    }
+
+    @Override
+    public void enterEnumType(RIIF2Parser.EnumTypeContext ctx) {
+        this.componentFactory.setEntityType(ComponentFactory.ENUM);
+
+        List<TerminalNode> items = ctx.Identifier();
+        for (TerminalNode item : items ){
+            String enumName = item.getText();
+            this.componentFactory.setEntityEnumType(enumName);
+        }
+    }
+
+    @Override
+    public void enterFieldInitializer(RIIF2Parser.FieldInitializerContext ctx) {
+        RIIF2Parser.ListInitializerContext listInitializerContext
+                = ctx.listInitializer();
+
+        RIIF2Parser.ExpressionContext expressionContext
+                = ctx.expression();
+
+        RIIF2Parser.ArrayInitializerContext arrayInitializerContext
+                = ctx.arrayInitializer();
+
+        if( listInitializerContext != null && this.componentFactory.isEntityList()){}
+        else{
+            //TODO: exception
+        }
+
+        if( arrayInitializerContext != null && this.componentFactory.isArrayEntity()){}
+        else{
+            //TODO: exception
+        }
+
+        if( expressionContext != null && this.componentFactory.isPrimitiveEntity()){}
+        else{
+            //TODO: exception
+        }
+    }
 }
