@@ -27,6 +27,11 @@ public class Expression {
     public static final int OP_SM = 25;
     public static final int OP_SINGLE_AND = 26;
     public static final int OP_SINGLE_OR = 27;
+    public static final int OP_SINGLE_POWER = 28;
+    public static final int OP_DOUBLE_AND = 29;
+    public static final int OP_DOUBLE_OR = 30;
+    public static final int OP_ASSIGN = 31;
+    public static final int OP_IF_ELSE = 32;
     private int type;
     private String stringValue;
     private int intValue;
@@ -58,6 +63,19 @@ public class Expression {
     }
 
     public Expression operation(int opr, Expression rightExp) {
+
+        return null;
+    }
+
+    public Expression operation(int opIfElse, Expression middleExp, Expression rightExp) {
+        return null;
+    }
+
+    public boolean isInteger() {
+        return null;
+    }
+
+    public Object getValue() {
 
         return null;
     }

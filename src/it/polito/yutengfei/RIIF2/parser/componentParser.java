@@ -1,12 +1,10 @@
 package it.polito.yutengfei.RIIF2.parser;
 
-import it.polito.yutengfei.RIIF2.RIIF2BaseListener;
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
 import it.polito.yutengfei.RIIF2.factory.ComponentFactory;
 import it.polito.yutengfei.RIIF2.factory.EntityPreparedException;
 import it.polito.yutengfei.RIIF2.factory.Factory;
 import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.List;
@@ -115,13 +113,20 @@ public class componentParser extends ExpressionParser {
                 = ctx.expression(1);
 
 
-        Expression expLeft = this.expTree.get(expCtxLeft);
-        Expression expRight = this.expTree.get(expCtxRight);
+        Expression expLeft = super.getExpression(expCtxLeft);
+        Expression expRight = super.getExpression(expCtxRight);
+
+        if( !expLeft.isInteger() || !expRight.isInteger() ){
+            //TODO: exception here should exit
+        }
 
         ParserRuleContext parentContext = ctx.getParent();
-
-        if(parentContext instanceof RIIF2Parser.TypeTypeContext)
+        if(parentContext instanceof RIIF2Parser.TypeTypeContext){
+            int vecLeft = (Integer)expLeft.getValue();
+            int vecRight = (Integer)expRight.getValue();
             this.componentFactory.setEntityVector(vecLeft,vecRight);
+        }
+
     }
 
     @Override

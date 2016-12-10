@@ -18,7 +18,7 @@ public class ExpressionParser extends RIIF2BaseListener {
         this.parser = parser;
     }
 
-    private Expression getExpression(ParseTree node){
+    public Expression getExpression(ParseTree node){
         return this.expTree.get(node);
     }
 
@@ -269,6 +269,74 @@ public class ExpressionParser extends RIIF2BaseListener {
         }
     }
 
-    
+    @Override
+    public void exitExpPower(RIIF2Parser.ExpPowerContext ctx) {
+        Expression leftExp = this.getExpression(ctx.expression(0));
+        Expression rightExp = this.getExpression(ctx.expression(1));
+
+        Expression expression = null;
+        try {
+            if (ctx.op.getType() == RIIF2Parser.T__26) {
+                expression = leftExp.operation(Expression.OP_SINGLE_POWER, rightExp);
+            }
+
+        }finally {
+            this.putExpression(ctx,expression);
+        }
+    }
+
+    @Override
+    public void exitExpDoubleAnd(RIIF2Parser.ExpDoubleAndContext ctx) {
+        Expression leftExp = this.getExpression(ctx.expression(0));
+        Expression rightExp = this.getExpression(ctx.expression(1));
+
+        Expression expression = null;
+        try {
+            if (ctx.op.getType() == RIIF2Parser.T__28) {
+                expression = leftExp.operation(Expression.OP_DOUBLE_AND, rightExp);
+            }
+
+        }finally {
+            this.putExpression(ctx,expression);
+        }
+    }
+
+    @Override
+    public void exitExpDoubleOr(RIIF2Parser.ExpDoubleOrContext ctx) {
+        Expression leftExp = this.getExpression(ctx.expression(0));
+        Expression rightExp = this.getExpression(ctx.expression(1));
+
+        Expression expression = null;
+        try {
+            if (ctx.op.getType() == RIIF2Parser.T__29) {
+                expression = leftExp.operation(Expression.OP_DOUBLE_OR, rightExp);
+            }
+
+        }finally {
+            this.putExpression(ctx,expression);
+        }
+    }
+
+    @Override
+    public void exitExpAssign(RIIF2Parser.ExpAssignContext ctx) {
+        Expression leftExp = this.getExpression(ctx.expression(0));
+        Expression rightExp = this.getExpression(ctx.expression(1));
+
+        leftExp.operation(Expression.OP_ASSIGN, rightExp);
+
+        this.putExpression(ctx,leftExp);
+    }
+
+    @Override
+    public void exitExpIfElse(RIIF2Parser.ExpIfElseContext ctx) {
+        Expression leftExp = this.getExpression(ctx.expression(0));
+        Expression middleExp = this.getExpression(ctx.expression(1));
+        Expression rightExp = this.getExpression(ctx.expression(2));
+
+        Expression expression = null;
+        expression = leftExp.operation(Expression.OP_IF_ELSE, middleExp,rightExp);
+
+        this.putExpression(ctx,expression);
+    }
 }
 
