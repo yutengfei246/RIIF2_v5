@@ -364,6 +364,18 @@ public class RIIF2BaseListener implements RIIF2Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterArrayInitializerWapper(RIIF2Parser.ArrayInitializerWapperContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayInitializerWapper(RIIF2Parser.ArrayInitializerWapperContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterArrayInitializer(RIIF2Parser.ArrayInitializerContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -400,13 +412,37 @@ public class RIIF2BaseListener implements RIIF2Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterListItem(RIIF2Parser.ListItemContext ctx) { }
+	@Override public void enterListItemDecimalLiteral(RIIF2Parser.ListItemDecimalLiteralContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitListItem(RIIF2Parser.ListItemContext ctx) { }
+	@Override public void exitListItemDecimalLiteral(RIIF2Parser.ListItemDecimalLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterListItemFloatingPointLiteral(RIIF2Parser.ListItemFloatingPointLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListItemFloatingPointLiteral(RIIF2Parser.ListItemFloatingPointLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterListItemIdentifier(RIIF2Parser.ListItemIdentifierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListItemIdentifier(RIIF2Parser.ListItemIdentifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -436,25 +472,49 @@ public class RIIF2BaseListener implements RIIF2Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRow(RIIF2Parser.RowContext ctx) { }
+	@Override public void enterRowArray(RIIF2Parser.RowArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRow(RIIF2Parser.RowContext ctx) { }
+	@Override public void exitRowArray(RIIF2Parser.RowArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRowItem(RIIF2Parser.RowItemContext ctx) { }
+	@Override public void enterRowExpression(RIIF2Parser.RowExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRowItem(RIIF2Parser.RowItemContext ctx) { }
+	@Override public void exitRowExpression(RIIF2Parser.RowExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRowItemExpression(RIIF2Parser.RowItemExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRowItemExpression(RIIF2Parser.RowItemExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRowItemListInitializer(RIIF2Parser.RowItemListInitializerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRowItemListInitializer(RIIF2Parser.RowItemListInitializerContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

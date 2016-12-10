@@ -162,4 +162,17 @@ public class ComponentFactory implements Factory {
         this.entityVectorLeft = vecLeft;
         this.entityVectorRight = vecRight;
     }
+
+    public int getEntityType() {
+        return entityType;
+    }
+
+    public void setEntityValue(String value ) throws EntityValueNotSuitableExpcetion{}
+    public void setEntityValue(Integer value ) throws EntityValueNotSuitableExpcetion{}
+    public void setEntityValue(Float value ) throws EntityValueNotSuitableExpcetion{}
+    public void setEntityValue(Boolean value ) throws EntityValueNotSuitableExpcetion{}
+    public void setEntityValue(Self value ) throws EntityValueNotSuitableExpcetion{}
+
+    public static class Self {
+    }
 }

@@ -169,7 +169,11 @@ requirementDeclaration
 fieldInitializer
     : listInitializer
     | expression
-    | arrayInitializer
+    | arrayInitializerWapper
+    ;
+
+arrayInitializerWapper
+    : '{' arrayInitializer ( ',' arrayInitializer )*  '}'
     ;
 
 arrayInitializer
@@ -178,8 +182,6 @@ arrayInitializer
 
 arrayItem
     : expression
-    | StringLiteral
-    | arrayInitializer
     ;
 
 listInitializer
@@ -187,15 +189,15 @@ listInitializer
     ;
 
 listItem
-    : DecimalLiteral
-    | FloatingPointLiteral
-    | Identifier  // Identifier means nothing in List expressed as String in JAVA
+    : DecimalLiteral #listItemDecimalLiteral
+    | FloatingPointLiteral #listItemFloatingPointLiteral
+    | Identifier  #listItemIdentifier // Identifier means nothing in List expressed as String in JAVA
     ;
 
 aisInitializer
     : listInitializer
     | expression
-    | arrayInitializer
+    | arrayInitializerWapper
     | tableItemInitializer
     ;
 
@@ -204,13 +206,13 @@ tableItemInitializer
     ;
 
 row
-    : '[' rowItem ( ',' rowItem ) * ']'
-    | expression
+    : '[' rowItem ( ',' rowItem ) * ']' #rowArray
+    | expression    #rowExpression
     ;
 
 rowItem
-    : expression
-    | listInitializer
+    : expression #rowItemExpression
+    | listInitializer #rowItemListInitializer
     ;
 
 primitiveFieldDeclaratorId

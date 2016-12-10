@@ -298,6 +298,16 @@ public interface RIIF2Listener extends ParseTreeListener {
 	 */
 	void exitFieldInitializer(RIIF2Parser.FieldInitializerContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link RIIF2Parser#arrayInitializerWapper}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayInitializerWapper(RIIF2Parser.ArrayInitializerWapperContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link RIIF2Parser#arrayInitializerWapper}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayInitializerWapper(RIIF2Parser.ArrayInitializerWapperContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link RIIF2Parser#arrayInitializer}.
 	 * @param ctx the parse tree
 	 */
@@ -328,15 +338,41 @@ public interface RIIF2Listener extends ParseTreeListener {
 	 */
 	void exitListInitializer(RIIF2Parser.ListInitializerContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link RIIF2Parser#listItem}.
+	 * Enter a parse tree produced by the {@code listItemDecimalLiteral}
+	 * labeled alternative in {@link RIIF2Parser#listItem}.
 	 * @param ctx the parse tree
 	 */
-	void enterListItem(RIIF2Parser.ListItemContext ctx);
+	void enterListItemDecimalLiteral(RIIF2Parser.ListItemDecimalLiteralContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link RIIF2Parser#listItem}.
+	 * Exit a parse tree produced by the {@code listItemDecimalLiteral}
+	 * labeled alternative in {@link RIIF2Parser#listItem}.
 	 * @param ctx the parse tree
 	 */
-	void exitListItem(RIIF2Parser.ListItemContext ctx);
+	void exitListItemDecimalLiteral(RIIF2Parser.ListItemDecimalLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code listItemFloatingPointLiteral}
+	 * labeled alternative in {@link RIIF2Parser#listItem}.
+	 * @param ctx the parse tree
+	 */
+	void enterListItemFloatingPointLiteral(RIIF2Parser.ListItemFloatingPointLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code listItemFloatingPointLiteral}
+	 * labeled alternative in {@link RIIF2Parser#listItem}.
+	 * @param ctx the parse tree
+	 */
+	void exitListItemFloatingPointLiteral(RIIF2Parser.ListItemFloatingPointLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code listItemIdentifier}
+	 * labeled alternative in {@link RIIF2Parser#listItem}.
+	 * @param ctx the parse tree
+	 */
+	void enterListItemIdentifier(RIIF2Parser.ListItemIdentifierContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code listItemIdentifier}
+	 * labeled alternative in {@link RIIF2Parser#listItem}.
+	 * @param ctx the parse tree
+	 */
+	void exitListItemIdentifier(RIIF2Parser.ListItemIdentifierContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link RIIF2Parser#aisInitializer}.
 	 * @param ctx the parse tree
@@ -358,25 +394,53 @@ public interface RIIF2Listener extends ParseTreeListener {
 	 */
 	void exitTableItemInitializer(RIIF2Parser.TableItemInitializerContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link RIIF2Parser#row}.
+	 * Enter a parse tree produced by the {@code rowArray}
+	 * labeled alternative in {@link RIIF2Parser#row}.
 	 * @param ctx the parse tree
 	 */
-	void enterRow(RIIF2Parser.RowContext ctx);
+	void enterRowArray(RIIF2Parser.RowArrayContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link RIIF2Parser#row}.
+	 * Exit a parse tree produced by the {@code rowArray}
+	 * labeled alternative in {@link RIIF2Parser#row}.
 	 * @param ctx the parse tree
 	 */
-	void exitRow(RIIF2Parser.RowContext ctx);
+	void exitRowArray(RIIF2Parser.RowArrayContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link RIIF2Parser#rowItem}.
+	 * Enter a parse tree produced by the {@code rowExpression}
+	 * labeled alternative in {@link RIIF2Parser#row}.
 	 * @param ctx the parse tree
 	 */
-	void enterRowItem(RIIF2Parser.RowItemContext ctx);
+	void enterRowExpression(RIIF2Parser.RowExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link RIIF2Parser#rowItem}.
+	 * Exit a parse tree produced by the {@code rowExpression}
+	 * labeled alternative in {@link RIIF2Parser#row}.
 	 * @param ctx the parse tree
 	 */
-	void exitRowItem(RIIF2Parser.RowItemContext ctx);
+	void exitRowExpression(RIIF2Parser.RowExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code rowItemExpression}
+	 * labeled alternative in {@link RIIF2Parser#rowItem}.
+	 * @param ctx the parse tree
+	 */
+	void enterRowItemExpression(RIIF2Parser.RowItemExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code rowItemExpression}
+	 * labeled alternative in {@link RIIF2Parser#rowItem}.
+	 * @param ctx the parse tree
+	 */
+	void exitRowItemExpression(RIIF2Parser.RowItemExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code rowItemListInitializer}
+	 * labeled alternative in {@link RIIF2Parser#rowItem}.
+	 * @param ctx the parse tree
+	 */
+	void enterRowItemListInitializer(RIIF2Parser.RowItemListInitializerContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code rowItemListInitializer}
+	 * labeled alternative in {@link RIIF2Parser#rowItem}.
+	 * @param ctx the parse tree
+	 */
+	void exitRowItemListInitializer(RIIF2Parser.RowItemListInitializerContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link RIIF2Parser#primitiveFieldDeclaratorId}.
 	 * @param ctx the parse tree

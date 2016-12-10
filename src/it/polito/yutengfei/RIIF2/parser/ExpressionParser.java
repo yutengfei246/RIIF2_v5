@@ -22,7 +22,7 @@ public class ExpressionParser extends RIIF2BaseListener {
         return this.expTree.get(node);
     }
 
-    private void putExpression(ParseTree node , Expression expression){
+    public void putExpression(ParseTree node , Expression expression){
         this.expTree.put(node,expression);
     }
 
@@ -64,7 +64,6 @@ public class ExpressionParser extends RIIF2BaseListener {
 
     @Override
     public void exitPrimaryParentheses(RIIF2Parser.PrimaryParenthesesContext ctx) {
-        //TODO: expression has to store in EXP-TREE
         Expression expression = this.getExpression(ctx.expression());
         this.putExpression(ctx,expression);
     }

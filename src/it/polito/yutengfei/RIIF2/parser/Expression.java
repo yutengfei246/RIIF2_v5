@@ -1,5 +1,9 @@
 package it.polito.yutengfei.RIIF2.parser;
 
+import it.polito.yutengfei.RIIF2.factory.ArrayItem;
+
+import java.util.List;
+
 /**
  * Created by yutengfei on 09/12/16.
  */
@@ -9,7 +13,7 @@ public class Expression {
     public static final int FLOAT = 3;
     public static final int BOOLEAN = 4;
     public static final int SELF = 5;
-
+    public static final int ARRAY = 6;
     public static final int OP_NEGATIVE = 11;
     public static final int OP_POSITIVE = 12;
     public static final int OP_WAVE = 13;
@@ -32,11 +36,13 @@ public class Expression {
     public static final int OP_DOUBLE_OR = 30;
     public static final int OP_ASSIGN = 31;
     public static final int OP_IF_ELSE = 32;
+
     private int type;
     private String stringValue;
     private int intValue;
     private float floatValue;
     private boolean booleanValue;
+    private List<ArrayItem> arrayValue;
 
     public void setType(int type) {
         this.type = type;
@@ -78,5 +84,13 @@ public class Expression {
     public Object getValue() {
 
         return null;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setValue(List<ArrayItem> value) {
+        this.arrayValue = value;
     }
 }
