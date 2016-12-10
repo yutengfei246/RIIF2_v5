@@ -9,6 +9,24 @@ public class Expression {
     public static final int FLOAT = 3;
     public static final int BOOLEAN = 4;
     public static final int SELF = 5;
+
+    public static final int OP_NEGATIVE = 11;
+    public static final int OP_POSITIVE = 12;
+    public static final int OP_WAVE = 13;
+    public static final int OP_NOT = 14;
+    public static final int OP_STAR = 15;
+    public static final int OP_DIV = 16;
+    public static final int OP_MOD = 17;
+    public static final int OP_PLUS = 18;
+    public static final int OP_MINUS = 19;
+    public static final int OP_SM_EQ = 20;
+    public static final int OP_BG_EQ = 21;
+    public static final int OP_EQ_EQ = 22;
+    public static final int OP_NOT_EQ = 23;
+    public static final int OP_BG = 24;
+    public static final int OP_SM = 25;
+    public static final int OP_SINGLE_AND = 26;
+    public static final int OP_SINGLE_OR = 27;
     private int type;
     private String stringValue;
     private int intValue;
@@ -33,5 +51,14 @@ public class Expression {
 
     public void setValue(boolean value) {
         this.booleanValue = value;
+    }
+
+    public void operation(int opration) {
+
+    }
+
+    public Expression operation(int opr, Expression rightExp) {
+
+        return null;
     }
 }

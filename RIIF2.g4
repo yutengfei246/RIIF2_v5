@@ -327,23 +327,23 @@ enumType
 /*RIIF-2: ANTlr.4 expression (Same with JAVA)*/
 expression
     : primary   #expPrimary
-    | ('+'|'-') expression  #expPositiveOrNegative
-    | ('~'|'!') expression  #expWaveOrNot
-    | expression ( '*' | '/' | '%' ) expression #expStarOrDivOrMod
-    | expression ( '-' | '+' ) expression   #expMinusOrPlus
-    | expression ('<=' | '>=' | '>' | '<') expression #expCmp
-    | expression ('==' | '!=') expression #expEqOrNotEq
-    | expression '&' expression #expSingleAnd
-    | expression '^' expression #expPower
-    | expression '|' expression #expSingleOr
-    | expression '&&' expression #expDoubleAnd
-    | expression '||' expression #expDoubleOr
-    | expression '?' expression ':' expression #expIfElse
-    | <assoc=right> expression '=' expression #expAssign
+    | op=('+'|'-') expression  #expPositiveOrNegative
+    | op=('~'|'!') expression  #expWaveOrNot
+    | expression op=( '*' | '/' | '%' ) expression #expStarOrDivOrMod
+    | expression op=( '-' | '+' ) expression   #expMinusOrPlus
+    | expression op=('<=' | '>=' | '>' | '<') expression #expCmp
+    | expression op=('==' | '!=') expression #expEqOrNotEq
+    | expression op='&' expression #expSingleAnd
+    | expression op='^' expression #expPower
+    | expression op='|' expression #expSingleOr
+    | expression op='&&' expression #expDoubleAnd
+    | expression op='||' expression #expDoubleOr
+    | expression op='?' expression op=':' expression #expIfElse
+    | <assoc=right> expression op='=' expression #expAssign
     ;
 
 primary
-    : '(' expression ')' #primaryParenthese
+    : '(' expression ')' #primaryParentheses
     | SELF  #primarySelf
     | TRUE  #primaryTrue
     | FALSE #primaryFalse
@@ -369,9 +369,9 @@ funcArg
 
 /*Literal*/
 literal
-    : StringLiteral
-    | DecimalLiteral
-    | FloatingPointLiteral
+    : StringLiteral #literalString
+    | DecimalLiteral #literalDecimal
+    | FloatingPointLiteral #literalFloatingPoint
     ;
 
 

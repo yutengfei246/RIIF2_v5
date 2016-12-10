@@ -776,17 +776,17 @@ public interface RIIF2Listener extends ParseTreeListener {
 	 */
 	void exitExpStarOrDivOrMod(RIIF2Parser.ExpStarOrDivOrModContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code primaryParenthese}
+	 * Enter a parse tree produced by the {@code primaryParentheses}
 	 * labeled alternative in {@link RIIF2Parser#primary}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrimaryParenthese(RIIF2Parser.PrimaryParentheseContext ctx);
+	void enterPrimaryParentheses(RIIF2Parser.PrimaryParenthesesContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code primaryParenthese}
+	 * Exit a parse tree produced by the {@code primaryParentheses}
 	 * labeled alternative in {@link RIIF2Parser#primary}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrimaryParenthese(RIIF2Parser.PrimaryParentheseContext ctx);
+	void exitPrimaryParentheses(RIIF2Parser.PrimaryParenthesesContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code primarySelf}
 	 * labeled alternative in {@link RIIF2Parser#primary}.
@@ -902,13 +902,39 @@ public interface RIIF2Listener extends ParseTreeListener {
 	 */
 	void exitFuncArg(RIIF2Parser.FuncArgContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link RIIF2Parser#literal}.
+	 * Enter a parse tree produced by the {@code literalString}
+	 * labeled alternative in {@link RIIF2Parser#literal}.
 	 * @param ctx the parse tree
 	 */
-	void enterLiteral(RIIF2Parser.LiteralContext ctx);
+	void enterLiteralString(RIIF2Parser.LiteralStringContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link RIIF2Parser#literal}.
+	 * Exit a parse tree produced by the {@code literalString}
+	 * labeled alternative in {@link RIIF2Parser#literal}.
 	 * @param ctx the parse tree
 	 */
-	void exitLiteral(RIIF2Parser.LiteralContext ctx);
+	void exitLiteralString(RIIF2Parser.LiteralStringContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code literalDecimal}
+	 * labeled alternative in {@link RIIF2Parser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void enterLiteralDecimal(RIIF2Parser.LiteralDecimalContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code literalDecimal}
+	 * labeled alternative in {@link RIIF2Parser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void exitLiteralDecimal(RIIF2Parser.LiteralDecimalContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code literalFloatingPoint}
+	 * labeled alternative in {@link RIIF2Parser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void enterLiteralFloatingPoint(RIIF2Parser.LiteralFloatingPointContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code literalFloatingPoint}
+	 * labeled alternative in {@link RIIF2Parser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void exitLiteralFloatingPoint(RIIF2Parser.LiteralFloatingPointContext ctx);
 }

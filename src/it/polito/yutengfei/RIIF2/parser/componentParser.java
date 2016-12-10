@@ -8,24 +8,18 @@ import it.polito.yutengfei.RIIF2.factory.Factory;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.TerminalNode;
-import org.antlr.v4.tool.ast.TerminalAST;
 
 import java.util.List;
 
 /**
  * Created by yutengfei on 09/12/16.
  */
-public class componentParser extends RIIF2BaseListener {
+public class componentParser extends ExpressionParser {
 
-
-    private final RIIF2Parser parser;
     private ComponentFactory componentFactory = Factory.newComponentFactory();
 
-
-    private ParseTreeProperty<Expression>  expTree = new ParseTreeProperty<>();
-
     public componentParser(RIIF2Parser parser){
-        this.parser = parser;
+        super(parser);
     }
 
     @Override
@@ -111,39 +105,6 @@ public class componentParser extends RIIF2BaseListener {
             this.componentFactory.setEntityTypeType(ComponentFactory.TYPE_VECTOR);
         }
     }
-
-    @Override
-    public void exitLiteral(RIIF2Parser.LiteralContext ctx) {
-        TerminalNode StringToken = ctx.StringLiteral();
-        TerminalNode DecimalToken = ctx.DecimalLiteral();
-        TerminalNode FloatingToken = ctx.FloatingPointLiteral();
-
-        Expression expression = new Expression();
-
-        if(StringToken != null){
-            expression.setType(Expression.STRING);
-
-            String value = StringToken.getText();
-            expression.setValue(value);
-        }
-
-        if(DecimalToken != null){
-            expression.setType(Expression.INTEGER);
-
-            int value = Integer.valueOf( DecimalToken.getText() );
-            expression.setValue(value);
-        }
-
-        if(FloatingToken != null){
-            expression.setType(Expression.FLOAT);
-
-            float value = Float.valueOf( FloatingToken.getText() );
-            expression.setValue( value );
-        }
-
-        this.expTree.put(ctx,expression);
-    }
-
 
     @Override
     public void exitVector(RIIF2Parser.VectorContext ctx) {
@@ -242,4 +203,6 @@ public class componentParser extends RIIF2BaseListener {
             //TODO: exception
         }
     }
+
+
 }

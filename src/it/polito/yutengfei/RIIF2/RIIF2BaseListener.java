@@ -904,13 +904,13 @@ public class RIIF2BaseListener implements RIIF2Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPrimaryParenthese(RIIF2Parser.PrimaryParentheseContext ctx) { }
+	@Override public void enterPrimaryParentheses(RIIF2Parser.PrimaryParenthesesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPrimaryParenthese(RIIF2Parser.PrimaryParentheseContext ctx) { }
+	@Override public void exitPrimaryParentheses(RIIF2Parser.PrimaryParenthesesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1036,13 +1036,37 @@ public class RIIF2BaseListener implements RIIF2Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLiteral(RIIF2Parser.LiteralContext ctx) { }
+	@Override public void enterLiteralString(RIIF2Parser.LiteralStringContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLiteral(RIIF2Parser.LiteralContext ctx) { }
+	@Override public void exitLiteralString(RIIF2Parser.LiteralStringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLiteralDecimal(RIIF2Parser.LiteralDecimalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLiteralDecimal(RIIF2Parser.LiteralDecimalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLiteralFloatingPoint(RIIF2Parser.LiteralFloatingPointContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLiteralFloatingPoint(RIIF2Parser.LiteralFloatingPointContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
