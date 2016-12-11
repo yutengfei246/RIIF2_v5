@@ -5,6 +5,7 @@ import it.polito.yutengfei.RIIF2.factory.ComponentFactory;
 import it.polito.yutengfei.RIIF2.factory.EntityPreparedException;
 import it.polito.yutengfei.RIIF2.factory.EntityValueNotSuitableExpcetion;
 import it.polito.yutengfei.RIIF2.factory.Factory;
+import it.polito.yutengfei.RIIF2.parser.utility.Expression;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.TerminalNode;
 

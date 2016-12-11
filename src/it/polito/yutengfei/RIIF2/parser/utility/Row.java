@@ -1,13 +1,15 @@
-package it.polito.yutengfei.RIIF2.parser;
+package it.polito.yutengfei.RIIF2.parser.utility;
 
 import java.util.List;
 
 /**
  * Created by yutengfei on 10/12/16.
  */
-public class RowItem {
-    public static final int LIST = 0;
+public class Row {
+
+
     public static final int EXPRESSION = 1;
+    public static final int ROW_ITEMS_ARRAY = 2;
     private int type;
     private Expression expressionValue;
 
@@ -19,7 +21,12 @@ public class RowItem {
         this.expressionValue = value;
     }
 
-    public void setValue(List<String> list) {
+    public int getPrimitiveType() {
+
+        return  0;
+    }
+
+    public void setValue(List<RowItem> rowItems) {
 
     }
 }

@@ -1,4 +1,4 @@
-package it.polito.yutengfei.RIIF2.parser;
+package it.polito.yutengfei.RIIF2.parser.utility;
 
 import it.polito.yutengfei.RIIF2.factory.ArrayItem;
 

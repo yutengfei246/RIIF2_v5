@@ -2,6 +2,10 @@ package it.polito.yutengfei.RIIF2.parser;
 
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
 import it.polito.yutengfei.RIIF2.factory.ArrayItem;
+import it.polito.yutengfei.RIIF2.parser.utility.Expression;
+import it.polito.yutengfei.RIIF2.parser.utility.Row;
+import it.polito.yutengfei.RIIF2.parser.utility.RowItem;
+import it.polito.yutengfei.RIIF2.parser.utility.Table;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
@@ -11,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InitializerParser extends ExpressionParser {
+
+    // list initializer parser
 
     private ParseTreeProperty<String> listItemTree = new ParseTreeProperty<>();
     private List<String> listInitializer = null;
@@ -37,10 +43,6 @@ public class InitializerParser extends ExpressionParser {
     public InitializerParser(RIIF2Parser parser) {
         super(parser);
     }
-
-
-
-    // list initializer parser
 
     @Override
     public void exitListItemDecimalLiteral(RIIF2Parser.ListItemDecimalLiteralContext ctx) {
@@ -142,24 +144,35 @@ public class InitializerParser extends ExpressionParser {
 
     private ParseTreeProperty<Row> rowParseTreeProperty = new ParseTreeProperty<>();
     private ParseTreeProperty<RowItem> rowItemParseTreeProperty = new ParseTreeProperty<>();
+    private List<Row> tableInitializer = null;
 
-
-    public void putRowParseTree(ParseTree node , Row value ){
+    private void putRowParseTree(ParseTree node , Row value ){
         this.rowParseTreeProperty.put(node,value);
     }
 
-    public Row getRowParseTree(ParseTree node ){
+    private Row getRowParseTree(ParseTree node ){
         return this.rowParseTreeProperty.get(node );
     }
 
-    public void putRowItemParseTree(ParseTree node ,RowItem value){
+    private void putRowItemParseTree(ParseTree node ,RowItem value){
         this.rowItemParseTreeProperty.put(node,value);
     }
 
-    public RowItem getRowItemParseTree(ParseTree node){
+    private RowItem getRowItemParseTree(ParseTree node){
         return this.rowItemParseTreeProperty.get(node );
     }
 
+    public List<Row> getTableInitializer(){
+        List<Row> returnedTable = this.tableInitializer;
+        this.cleanTable();
+        return returnedTable;
+    }
+
+    private void cleanTable(){
+        this.rowItemParseTreeProperty = new ParseTreeProperty<>();
+        this.rowParseTreeProperty = new ParseTreeProperty<>();
+        this.tableInitializer = null;
+    }
 
     @Override
     public void exitRowExpression(RIIF2Parser.RowExpressionContext ctx) {
@@ -218,7 +231,7 @@ public class InitializerParser extends ExpressionParser {
         }
 
         Row row = new Row();
-        row.setType(Row.ROW_ITEM);
+        row.setType(Row.ROW_ITEMS_ARRAY);
         row.setValue(rowItems);
 
         this.putRowParseTree(ctx,row);
@@ -229,8 +242,11 @@ public class InitializerParser extends ExpressionParser {
         List<RIIF2Parser.RowContext> rowContexts
                 = ctx.row();
 
+        List<Row> currentTableInitializer = new ArrayList<>();
         for (RIIF2Parser.RowContext rowContext : rowContexts){
-            //TODO: here
+            Row row = this.getRowParseTree(rowContext);
+            currentTableInitializer.add(row);
         }
+        this.tableInitializer = currentTableInitializer;
     }
 }
