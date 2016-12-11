@@ -2,7 +2,8 @@ package it.polito.yutengfei.RIIF2.parser;
 
 import it.polito.yutengfei.RIIF2.RIIF2BaseListener;
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
-import it.polito.yutengfei.RIIF2.parser.utility.Expression;
+import it.polito.yutengfei.RIIF2.parser.utilityRecoder.Recoder;
+import it.polito.yutengfei.RIIF2.parser.utilityWrapper.Expression;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
@@ -11,11 +12,13 @@ import org.antlr.v4.runtime.tree.ParseTreeProperty;
  */
 public class ExpressionParser extends RIIF2BaseListener {
 
+    private Recoder recoder;
     private ParseTreeProperty<Expression> expTree = new ParseTreeProperty<>();
 
     private final RIIF2Parser parser;
 
-    public ExpressionParser(RIIF2Parser parser){
+    public ExpressionParser(RIIF2Parser parser, Recoder recoder){
+        this.recoder = recoder;
         this.parser = parser;
     }
 
@@ -32,6 +35,7 @@ public class ExpressionParser extends RIIF2BaseListener {
         Expression expression = new Expression();
 
         String value = ctx.getText();
+        expression.setType(Expression.STRING);
         expression.setValue(value);
 
         this.putExpression(ctx,expression);
@@ -42,6 +46,7 @@ public class ExpressionParser extends RIIF2BaseListener {
         Expression expression = new Expression();
 
         int value = Integer.valueOf( ctx.getText() );
+        expression.setType(Expression.INTEGER);
         expression.setValue(value);
 
         this.putExpression(ctx,expression);
@@ -52,6 +57,7 @@ public class ExpressionParser extends RIIF2BaseListener {
         Expression expression = new Expression();
 
         float value = Float.valueOf( ctx.getText() );
+        expression.setType(Expression.FLOAT);
         expression.setValue(value);
 
         this.putExpression(ctx,expression);
@@ -72,7 +78,7 @@ public class ExpressionParser extends RIIF2BaseListener {
     @Override
     public void exitPrimaryFalse(RIIF2Parser.PrimaryFalseContext ctx) {
         Expression expression = new Expression();
-        expression.setType(Expression.BOOLEAN);
+        expression.setValue(Expression.BOOLEAN);
         expression.setValue(false);
         this.putExpression(ctx,expression);
     }
@@ -108,7 +114,7 @@ public class ExpressionParser extends RIIF2BaseListener {
 
     @Override
     public void exitPrimaryArrayInitializer(RIIF2Parser.PrimaryArrayInitializerContext ctx) {
-        //TODO: arrayInitializer has to be stored into EXP-TREE
+        //arrayInitializer has to be stored into EXP-TREE
         Expression expression = this.getExpression(ctx.arrayInitializer());
         this.putExpression(ctx,expression);
     }
@@ -122,15 +128,17 @@ public class ExpressionParser extends RIIF2BaseListener {
     @Override
     public void exitExpPositiveOrNegative(RIIF2Parser.ExpPositiveOrNegativeContext ctx) {
         Expression expression = this.getExpression(ctx.expression());
+
+        Expression newExpression = null;
         if (ctx.op.getType() == RIIF2Parser.T__15){
-            expression.operation(Expression.OP_NEGATIVE);
+            newExpression = expression.operation(Expression.OP_NEGATIVE);
         }
 
         if ( ctx.op.getType() == RIIF2Parser.T__14){
-            expression.operation(Expression.OP_POSITIVE);
+            newExpression = expression.operation(Expression.OP_POSITIVE);
         }
 
-        this.putExpression(ctx,expression);
+        this.putExpression(ctx,newExpression);
     }
 
     @Override
@@ -337,6 +345,7 @@ public class ExpressionParser extends RIIF2BaseListener {
         expression = leftExp.operation(Expression.OP_IF_ELSE, middleExp,rightExp);
 
         this.putExpression(ctx,expression);
+
     }
 }
 

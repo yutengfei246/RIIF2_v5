@@ -41,7 +41,7 @@ public class RIIF2Parser extends Parser {
 		RULE_templateBodyElement = 20, RULE_abstractFieldDeclaration = 21, RULE_abstractFailModeDeclaration = 22, 
 		RULE_abstractPlatformDeclaration = 23, RULE_environmentDeclaration = 24, 
 		RULE_environmentBodyElement = 25, RULE_envParameterDeclaration = 26, RULE_requirementDeclaration = 27, 
-		RULE_fieldInitializer = 28, RULE_arrayInitializerWapper = 29, RULE_arrayInitializer = 30, 
+		RULE_fieldInitializer = 28, RULE_arrayInitializerWrapper = 29, RULE_arrayInitializer = 30, 
 		RULE_arrayItem = 31, RULE_listInitializer = 32, RULE_listItem = 33, RULE_aisInitializer = 34, 
 		RULE_tableItemInitializer = 35, RULE_row = 36, RULE_rowItem = 37, RULE_primitiveFieldDeclaratorId = 38, 
 		RULE_associativeIndexDeclaratorId = 39, RULE_tableFieldDeclaratorId = 40, 
@@ -63,7 +63,7 @@ public class RIIF2Parser extends Parser {
 		"templateBodyElement", "abstractFieldDeclaration", "abstractFailModeDeclaration", 
 		"abstractPlatformDeclaration", "environmentDeclaration", "environmentBodyElement", 
 		"envParameterDeclaration", "requirementDeclaration", "fieldInitializer", 
-		"arrayInitializerWapper", "arrayInitializer", "arrayItem", "listInitializer", 
+		"arrayInitializerWrapper", "arrayInitializer", "arrayItem", "listInitializer", 
 		"listItem", "aisInitializer", "tableItemInitializer", "row", "rowItem", 
 		"primitiveFieldDeclaratorId", "associativeIndexDeclaratorId", "tableFieldDeclaratorId", 
 		"listFieldDeclaratorId", "childComponentDeclaratorId", "childComponentTypeId", 
@@ -1921,8 +1921,8 @@ public class RIIF2Parser extends Parser {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public ArrayInitializerWapperContext arrayInitializerWapper() {
-			return getRuleContext(ArrayInitializerWapperContext.class,0);
+		public ArrayInitializerWrapperContext arrayInitializerWrapper() {
+			return getRuleContext(ArrayInitializerWrapperContext.class,0);
 		}
 		public FieldInitializerContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1963,7 +1963,7 @@ public class RIIF2Parser extends Parser {
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(340);
-				arrayInitializerWapper();
+				arrayInitializerWrapper();
 				}
 				break;
 			}
@@ -1979,30 +1979,30 @@ public class RIIF2Parser extends Parser {
 		return _localctx;
 	}
 
-	public static class ArrayInitializerWapperContext extends ParserRuleContext {
+	public static class ArrayInitializerWrapperContext extends ParserRuleContext {
 		public List<ArrayInitializerContext> arrayInitializer() {
 			return getRuleContexts(ArrayInitializerContext.class);
 		}
 		public ArrayInitializerContext arrayInitializer(int i) {
 			return getRuleContext(ArrayInitializerContext.class,i);
 		}
-		public ArrayInitializerWapperContext(ParserRuleContext parent, int invokingState) {
+		public ArrayInitializerWrapperContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_arrayInitializerWapper; }
+		@Override public int getRuleIndex() { return RULE_arrayInitializerWrapper; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).enterArrayInitializerWapper(this);
+			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).enterArrayInitializerWrapper(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitArrayInitializerWapper(this);
+			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitArrayInitializerWrapper(this);
 		}
 	}
 
-	public final ArrayInitializerWapperContext arrayInitializerWapper() throws RecognitionException {
-		ArrayInitializerWapperContext _localctx = new ArrayInitializerWapperContext(_ctx, getState());
-		enterRule(_localctx, 58, RULE_arrayInitializerWapper);
+	public final ArrayInitializerWrapperContext arrayInitializerWrapper() throws RecognitionException {
+		ArrayInitializerWrapperContext _localctx = new ArrayInitializerWrapperContext(_ctx, getState());
+		enterRule(_localctx, 58, RULE_arrayInitializerWrapper);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -2307,8 +2307,8 @@ public class RIIF2Parser extends Parser {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public ArrayInitializerWapperContext arrayInitializerWapper() {
-			return getRuleContext(ArrayInitializerWapperContext.class,0);
+		public ArrayInitializerWrapperContext arrayInitializerWrapper() {
+			return getRuleContext(ArrayInitializerWrapperContext.class,0);
 		}
 		public TableItemInitializerContext tableItemInitializer() {
 			return getRuleContext(TableItemInitializerContext.class,0);
@@ -2352,7 +2352,7 @@ public class RIIF2Parser extends Parser {
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(385);
-				arrayInitializerWapper();
+				arrayInitializerWrapper();
 				}
 				break;
 			case 4:

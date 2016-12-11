@@ -298,15 +298,15 @@ public interface RIIF2Listener extends ParseTreeListener {
 	 */
 	void exitFieldInitializer(RIIF2Parser.FieldInitializerContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link RIIF2Parser#arrayInitializerWapper}.
+	 * Enter a parse tree produced by {@link RIIF2Parser#arrayInitializerWrapper}.
 	 * @param ctx the parse tree
 	 */
-	void enterArrayInitializerWapper(RIIF2Parser.ArrayInitializerWapperContext ctx);
+	void enterArrayInitializerWrapper(RIIF2Parser.ArrayInitializerWrapperContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link RIIF2Parser#arrayInitializerWapper}.
+	 * Exit a parse tree produced by {@link RIIF2Parser#arrayInitializerWrapper}.
 	 * @param ctx the parse tree
 	 */
-	void exitArrayInitializerWapper(RIIF2Parser.ArrayInitializerWapperContext ctx);
+	void exitArrayInitializerWrapper(RIIF2Parser.ArrayInitializerWrapperContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link RIIF2Parser#arrayInitializer}.
 	 * @param ctx the parse tree

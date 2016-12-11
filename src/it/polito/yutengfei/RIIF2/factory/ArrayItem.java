@@ -1,6 +1,6 @@
 package it.polito.yutengfei.RIIF2.factory;
 
-import it.polito.yutengfei.RIIF2.parser.utility.Expression;
+import it.polito.yutengfei.RIIF2.parser.utilityWrapper.Expression;
 
 import java.util.List;
 

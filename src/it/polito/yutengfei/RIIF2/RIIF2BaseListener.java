@@ -364,13 +364,13 @@ public class RIIF2BaseListener implements RIIF2Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayInitializerWapper(RIIF2Parser.ArrayInitializerWapperContext ctx) { }
+	@Override public void enterArrayInitializerWrapper(RIIF2Parser.ArrayInitializerWrapperContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayInitializerWapper(RIIF2Parser.ArrayInitializerWapperContext ctx) { }
+	@Override public void exitArrayInitializerWrapper(RIIF2Parser.ArrayInitializerWrapperContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

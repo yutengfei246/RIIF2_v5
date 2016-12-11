@@ -169,10 +169,10 @@ requirementDeclaration
 fieldInitializer
     : listInitializer
     | expression
-    | arrayInitializerWapper
+    | arrayInitializerWrapper
     ;
 
-arrayInitializerWapper
+arrayInitializerWrapper
     : '{' arrayInitializer ( ',' arrayInitializer )*  '}'
     ;
 
@@ -197,7 +197,7 @@ listItem
 aisInitializer
     : listInitializer
     | expression
-    | arrayInitializerWapper
+    | arrayInitializerWrapper
     | tableItemInitializer
     ;
 

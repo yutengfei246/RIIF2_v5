@@ -5,7 +5,8 @@ import it.polito.yutengfei.RIIF2.factory.ComponentFactory;
 import it.polito.yutengfei.RIIF2.factory.EntityPreparedException;
 import it.polito.yutengfei.RIIF2.factory.EntityValueNotSuitableExpcetion;
 import it.polito.yutengfei.RIIF2.factory.Factory;
-import it.polito.yutengfei.RIIF2.parser.utility.Expression;
+import it.polito.yutengfei.RIIF2.parser.utilityRecoder.Recoder;
+import it.polito.yutengfei.RIIF2.parser.utilityWrapper.Expression;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -17,9 +18,12 @@ import java.util.List;
 public class componentParser extends InitializerParser{
 
     private ComponentFactory componentFactory = Factory.newComponentFactory();
+    private Recoder recoder ;
 
-    public componentParser(RIIF2Parser parser){
-        super(parser);
+    public componentParser(RIIF2Parser parser, Recoder recoder){
+        super(parser, recoder);
+
+        this.recoder =recoder;
     }
 
     @Override
@@ -118,12 +122,15 @@ public class componentParser extends InitializerParser{
         Expression expLeft = super.getExpression(expCtxLeft);
         Expression expRight = super.getExpression(expCtxRight);
 
-        if( !expLeft.isInteger() || !expRight.isInteger() ){
+        if( !expLeft.isPositiveInteger() || !expRight.isPositiveInteger() ){
             //TODO: exception here should exit
         }
 
         ParserRuleContext parentContext = ctx.getParent();
-        if(parentContext instanceof RIIF2Parser.TypeTypeContext){
+        if(parentContext instanceof RIIF2Parser.TypeTypeContext &&
+                expLeft.isPositiveInteger() &&
+                expRight.isPositiveInteger() ){
+
             int vecLeft = (Integer)expLeft.getValue();
             int vecRight = (Integer)expRight.getValue();
             this.componentFactory.setEntityVector(vecLeft,vecRight);
@@ -193,8 +200,8 @@ public class componentParser extends InitializerParser{
         RIIF2Parser.ExpressionContext expressionContext
                 = ctx.expression();
 
-        RIIF2Parser.ArrayInitializerContext arrayInitializerContext
-                = ctx.arrayInitializer();
+        RIIF2Parser.ArrayInitializerWrapperContext arrayInitializerContext
+                = ctx.arrayInitializerWrapper();
 
         if( listInitializerContext != null && this.componentFactory.isEntityList()){}
         else{
