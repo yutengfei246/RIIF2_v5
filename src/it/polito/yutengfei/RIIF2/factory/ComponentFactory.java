@@ -1,6 +1,7 @@
 package it.polito.yutengfei.RIIF2.factory;
 
 import it.polito.yutengfei.RIIF2.factory.RIIF2Modules.Constant;
+import it.polito.yutengfei.RIIF2.factory.utility.FieldFactory;
 
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
@@ -11,14 +12,11 @@ import java.util.List;
  */
 public class ComponentFactory implements Factory {
 
-    private static final String NO_NAME = "";
-    private static final int NO_VALUE = -1;
     private static final int NO_ENTITY = 0;
+
     public static final int FIELD = 1;
     public static final int PARAMETER = 2;
     public static final int CONSTANT = 3;
-    public static final int TYPE_ASSOCIATIVE = 20;
-    public static final int TYPE_VECTOR = 21;
     public static final int BOOLEAN = 4 ;
     public static final int FLOAT = 5;
     public static final int INTEGER = 6;
@@ -27,26 +25,27 @@ public class ComponentFactory implements Factory {
     public static final int USER_DEFINED = 9;
     public static final int ENUM = 10;
 
+    public static final int TYPE_ASSOCIATIVE = 20;
+    public static final int TYPE_VECTOR = 21;
+    public static final int LIST_INITIALIZER = 30;
+    public static final int ARRAY_INITIALIZER = 31;
+    public static final int EXPRESSION = 32;
+
+    // component entity
+
+    // component name :
     private String currComponentIdentifier = null;
+    // component extends class :
     private List<String> eXIdentifiers = null ;
+    // component implemented class :
     private List<String> implIdentifiers = null;
 
-    private Parameter parameter = null;
-    private Constant constant = null;
+    // prepared value
 
-    private int currentEntity = NO_ENTITY ;
-    private int entityTypeType = NO_VALUE;
-    private int entityType = NO_VALUE ;
-    private String entityIdentifier = NO_NAME;
-    private boolean entityIsAttribute = false;
-    private Boolean entityIsAssociativeIndex = false;
-    private String entityAssociativeIndexIdentifier = NO_NAME;
-    private String entityTypeDefinedByUser = NO_NAME;
-    private List<String> entityEnumType = null;
-    private boolean entityIsList = false;
-    private boolean entityIsArray = false ;
-    private int entityVectorRight = NO_VALUE;
-    private int entityVectorLeft = NO_VALUE;
+    // specify current entity type:  parameter constant fail:mode child:mode
+    private int currentEntity = NO_ENTITY;
+
+    private FieldFactory fieldFactory = null;
 
 
     //initialization: tell the component start to prepare component with no name
@@ -74,97 +73,143 @@ public class ComponentFactory implements Factory {
             this.implIdentifiers = new ArrayList<>();
 
         this.implIdentifiers.add(identifier);
-
     }
 
     public Boolean prepare(int key) throws EntityPreparedException {
         switch(key){
             case FIELD:
                 return this.prepareField();
-            case PARAMETER:
-                return this.prepareParameter();
-            case CONSTANT:
-                return this.prepareConstant();
 
         }
         return false;
     }
 
     private Boolean prepareConstant() throws EntityPreparedException {
-        if( this.currentEntity == NO_ENTITY)
+        if( this.currentEntity != FIELD)
             throw new EntityPreparedException();
 
-        this.currentEntity = CONSTANT;
+        this.fieldFactory.setFieldType( CONSTANT );
         return true;
     }
 
     private Boolean prepareParameter() throws EntityPreparedException {
-        if( this.currentEntity == NO_ENTITY)
+        if( this.currentEntity != FIELD)
             throw new EntityPreparedException();
 
-        this.currentEntity = PARAMETER;
+        this.fieldFactory.setFieldType( PARAMETER );
         return true;
     }
 
     private boolean prepareField() throws EntityPreparedException {
+        if( this.currentEntity != NO_ENTITY)
+            throw new EntityPreparedException();
+
+        this.currentEntity = FIELD;
+        this.fieldFactory = new FieldFactory();
+
         return true;
     }
 
     public void setEntityIdentifier(String identifier) {
-        this.entityIdentifier = identifier;
+
+        if( this.currentEntity == FIELD)
+            this.fieldFactory.setIdentifier( identifier );
     }
 
     public void setEntityTypeType(int type) {
-        this.entityTypeType = type ;
-    }
 
+        if( this.currentEntity == FIELD){
+            this.fieldFactory.setTypeTpye(type);
+        }
+    }
 
     public void setEntityIsAttribute() {
-        this.entityIsAttribute = true;
+
+        if( this.currentEntity == FIELD){
+            this.fieldFactory.setAttribute(true);
+        }
     }
 
-    public void setEntityIsAssociativeIndex(String identifier) {
-        this.entityIsAssociativeIndex = true;
-        this.entityAssociativeIndexIdentifier = identifier;
+    public void setEntityAttributeIndex(String attributeIndex){
+
+        this.setEntityIsAttribute();
+        if( this.currentEntity == FIELD ){
+            this.fieldFactory.setAttributeIndex( attributeIndex );
+        }
+    }
+
+    public void setEntityIsAssociativeInstance(){
+
+        if( this.currentEntity == FIELD)
+            this.fieldFactory.setAssociativeInstance(true);
+    }
+
+    public void setEntityAssociativeIndex(String identifier) {
+
+        this.setEntityIsAssociativeInstance();
+        if( this.currentEntity == FIELD)
+            this.fieldFactory.setAssociativeIndex( identifier );
     }
 
     public void setEntityType(int type) {
-        this.entityType = type;
+
+        if( this.currentEntity == FIELD )
+            this.fieldFactory.setType(type);
     }
 
     public void setEntityTypeDefinedByUser(String entityTypeDefinedByUser) {
-        this.entityTypeDefinedByUser = entityTypeDefinedByUser;
+
+        if( this.currentEntity == FIELD)
+            this.fieldFactory.setTypeUserType(entityTypeDefinedByUser);
     }
 
-    public void setEntityEnumType(String entityEnumType) {
-        if (this.entityEnumType == null)
-            this.entityEnumType = new ArrayList<>();
-        this.entityEnumType.add(entityEnumType);
+    public void setEntityEnumType(String entityEnum) {
+
+        if (this.currentEntity == FIELD) {
+            List<String> enumList = this.fieldFactory.getEnumList();
+            enumList.add(entityEnum);
+        }
     }
 
     public void prepareField(int fieldType) throws EntityPreparedException {
 
+        switch (fieldType){
+            case PARAMETER:
+                this.prepareParameter();
+            case CONSTANT:
+                this.prepareConstant();
+        }
     }
 
     public boolean isEntityList() {
-        return this.entityIsList;
+
+        if( this.currentEntity == FIELD)
+            return this.fieldFactory.isList();
+
+        return false;
     }
 
     public boolean isArrayEntity() {
-        return this.entityIsArray;
+
+        if( this.currentEntity == FIELD)
+            return this.fieldFactory.isArray();
+
+        return false;
     }
 
+
     public boolean isPrimitiveEntity() {
-        return primityEntity;
+
+        if( this.currentEntity == FIELD)
+            return this.fieldFactory.isPrimitiveType();
+
+        return false;
     }
 
     public void setEntityVector(int vecLeft, int vecRight) {
-        this.entityVectorLeft = vecLeft;
-        this.entityVectorRight = vecRight;
-    }
 
-    public int getEntityType() {
-        return entityType;
+        if( this.currentEntity == FIELD)
+            this.fieldFactory.setVector(vecLeft,vecRight);
     }
 
     public void setEntityValue(String value ) throws EntityValueNotSuitableExpcetion{}
@@ -172,6 +217,16 @@ public class ComponentFactory implements Factory {
     public void setEntityValue(Float value ) throws EntityValueNotSuitableExpcetion{}
     public void setEntityValue(Boolean value ) throws EntityValueNotSuitableExpcetion{}
     public void setEntityValue(Self value ) throws EntityValueNotSuitableExpcetion{}
+
+    public void setEntityInitializerType(int initializer) {
+
+        if( this.currentEntity == FIELD)
+            this.fieldFactory.setInitializerType( initializer );
+    }
+
+    public void setEntityInitializer(Object entityInitializer) {
+
+    }
 
     public static class Self {
     }

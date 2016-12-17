@@ -168,6 +168,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitProgram(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitProgram(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ProgramContext program() throws RecognitionException {
@@ -230,6 +235,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitTypeDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitTypeDeclaration(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -309,6 +319,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitComponentDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitComponentDeclaration(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -406,6 +421,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitComponentBodyElement(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitComponentBodyElement(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ComponentBodyElementContext componentBodyElement() throws RecognitionException {
@@ -498,6 +518,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitFieldDeclaration(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitFieldDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final FieldDeclarationContext fieldDeclaration() throws RecognitionException {
@@ -549,6 +574,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitFieldDeclaratorType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitFieldDeclaratorType(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -630,6 +660,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimitiveFieldDeclarator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimitiveFieldDeclarator(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -728,6 +763,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAssociativeIndexDeclarator(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAssociativeIndexDeclarator(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final AssociativeIndexDeclaratorContext associativeIndexDeclarator() throws RecognitionException {
@@ -782,6 +822,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitTableFieldDeclarator(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitTableFieldDeclarator(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final TableFieldDeclaratorContext tableFieldDeclarator() throws RecognitionException {
@@ -828,6 +873,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitListFieldDeclarator(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitListFieldDeclarator(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ListFieldDeclaratorContext listFieldDeclarator() throws RecognitionException {
@@ -871,6 +921,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitChildComponentDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitChildComponentDeclaration(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -926,6 +981,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitChildComponentDeclarator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitChildComponentDeclarator(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -995,6 +1055,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitFailModeDeclaration(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitFailModeDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final FailModeDeclarationContext failModeDeclaration() throws RecognitionException {
@@ -1046,6 +1111,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitFailModeDeclarator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitFailModeDeclarator(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1113,6 +1183,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitImposeDeclaration(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitImposeDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ImposeDeclarationContext imposeDeclaration() throws RecognitionException {
@@ -1157,6 +1232,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAssignment(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAssignment(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final AssignmentContext assignment() throws RecognitionException {
@@ -1200,6 +1280,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitSetTemplateDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitSetTemplateDeclaration(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1255,6 +1340,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAssignmentAndImposeAndSetDeclarator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAssignmentAndImposeAndSetDeclarator(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1329,6 +1419,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAssertion(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAssertion(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final AssertionContext assertion() throws RecognitionException {
@@ -1392,6 +1487,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitTemplateDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitTemplateDeclaration(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1471,6 +1571,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitTemplateBodyElement(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitTemplateBodyElement(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final TemplateBodyElementContext templateBodyElement() throws RecognitionException {
@@ -1538,6 +1643,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAbstractFieldDeclaration(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAbstractFieldDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final AbstractFieldDeclarationContext abstractFieldDeclaration() throws RecognitionException {
@@ -1580,6 +1690,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAbstractFailModeDeclaration(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAbstractFailModeDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final AbstractFailModeDeclarationContext abstractFailModeDeclaration() throws RecognitionException {
@@ -1620,6 +1735,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAbstractPlatformDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAbstractPlatformDeclaration(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1671,6 +1791,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitEnvironmentDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitEnvironmentDeclaration(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1735,6 +1860,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitEnvironmentBodyElement(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitEnvironmentBodyElement(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final EnvironmentBodyElementContext environmentBodyElement() throws RecognitionException {
@@ -1797,6 +1927,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitEnvParameterDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitEnvParameterDeclaration(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1870,6 +2005,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitRequirementDeclaration(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitRequirementDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final RequirementDeclarationContext requirementDeclaration() throws RecognitionException {
@@ -1936,6 +2076,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitFieldInitializer(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitFieldInitializer(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final FieldInitializerContext fieldInitializer() throws RecognitionException {
@@ -1997,6 +2142,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitArrayInitializerWrapper(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitArrayInitializerWrapper(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2061,6 +2211,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitArrayInitializer(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitArrayInitializer(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ArrayInitializerContext arrayInitializer() throws RecognitionException {
@@ -2121,6 +2276,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitArrayItem(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitArrayItem(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ArrayItemContext arrayItem() throws RecognitionException {
@@ -2162,6 +2322,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitListInitializer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitListInitializer(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2229,6 +2394,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitListItemIdentifier(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitListItemIdentifier(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ListItemFloatingPointLiteralContext extends ListItemContext {
 		public TerminalNode FloatingPointLiteral() { return getToken(RIIF2Parser.FloatingPointLiteral, 0); }
@@ -2241,6 +2411,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitListItemFloatingPointLiteral(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitListItemFloatingPointLiteral(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ListItemDecimalLiteralContext extends ListItemContext {
 		public TerminalNode DecimalLiteral() { return getToken(RIIF2Parser.DecimalLiteral, 0); }
@@ -2252,6 +2427,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitListItemDecimalLiteral(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitListItemDecimalLiteral(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2325,6 +2505,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAisInitializer(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAisInitializer(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final AisInitializerContext aisInitializer() throws RecognitionException {
@@ -2393,6 +2578,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitTableItemInitializer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitTableItemInitializer(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2465,6 +2655,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitRowArray(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitRowArray(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class RowExpressionContext extends RowContext {
 		public ExpressionContext expression() {
@@ -2478,6 +2673,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitRowExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitRowExpression(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2562,6 +2762,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitRowItemListInitializer(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitRowItemListInitializer(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class RowItemExpressionContext extends RowItemContext {
 		public ExpressionContext expression() {
@@ -2575,6 +2780,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitRowItemExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitRowItemExpression(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2645,6 +2855,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimitiveFieldDeclaratorId(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimitiveFieldDeclaratorId(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final PrimitiveFieldDeclaratorIdContext primitiveFieldDeclaratorId() throws RecognitionException {
@@ -2681,6 +2896,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAssociativeIndexDeclaratorId(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAssociativeIndexDeclaratorId(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2719,6 +2939,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitTableFieldDeclaratorId(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitTableFieldDeclaratorId(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final TableFieldDeclaratorIdContext tableFieldDeclaratorId() throws RecognitionException {
@@ -2755,6 +2980,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitListFieldDeclaratorId(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitListFieldDeclaratorId(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2793,6 +3023,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitChildComponentDeclaratorId(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitChildComponentDeclaratorId(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ChildComponentDeclaratorIdContext childComponentDeclaratorId() throws RecognitionException {
@@ -2830,6 +3065,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitChildComponentTypeId(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitChildComponentTypeId(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ChildComponentTypeIdContext childComponentTypeId() throws RecognitionException {
@@ -2866,6 +3106,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitFailModeDeclaratorId(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitFailModeDeclaratorId(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2914,6 +3159,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAisDeclaratorId(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAisDeclaratorId(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2981,6 +3231,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimitiveId(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimitiveId(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3062,6 +3317,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAssociativeId(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAssociativeId(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final AssociativeIdContext associativeId() throws RecognitionException {
@@ -3108,6 +3368,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAttributeId(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAttributeId(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3166,6 +3431,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitVariableId(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitVariableId(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final VariableIdContext variableId() throws RecognitionException {
@@ -3223,6 +3493,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAttributeIndex(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAttributeIndex(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final AttributeIndexContext attributeIndex() throws RecognitionException {
@@ -3261,6 +3536,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAssociativeIndex(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAssociativeIndex(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3306,6 +3586,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExtendsList(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExtendsList(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3366,6 +3651,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitImplementsList(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitImplementsList(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3429,6 +3719,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitTableId(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitTableId(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final TableIdContext tableId() throws RecognitionException {
@@ -3491,6 +3786,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimitiveType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimitiveType(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3583,6 +3883,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitTypeType(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitTypeType(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final TypeTypeContext typeType() throws RecognitionException {
@@ -3632,6 +3937,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitAssociativeType(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitAssociativeType(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final AssociativeTypeContext associativeType() throws RecognitionException {
@@ -3675,6 +3985,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitVector(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitVector(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3722,6 +4037,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitFieldType(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitFieldType(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final FieldTypeContext fieldType() throws RecognitionException {
@@ -3768,6 +4088,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitEnumType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitEnumType(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3843,6 +4168,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpCmp(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpCmp(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ExpPrimaryContext extends ExpressionContext {
 		public PrimaryContext primary() {
@@ -3856,6 +4186,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpPrimary(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpPrimary(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ExpEqOrNotEqContext extends ExpressionContext {
@@ -3875,6 +4210,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpEqOrNotEq(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpEqOrNotEq(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ExpIfElseContext extends ExpressionContext {
 		public Token op;
@@ -3892,6 +4232,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpIfElse(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpIfElse(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ExpDoubleOrContext extends ExpressionContext {
@@ -3911,6 +4256,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpDoubleOr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpDoubleOr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ExpPositiveOrNegativeContext extends ExpressionContext {
 		public Token op;
@@ -3925,6 +4275,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpPositiveOrNegative(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpPositiveOrNegative(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ExpAssignContext extends ExpressionContext {
@@ -3944,6 +4299,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpAssign(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpAssign(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ExpSingleOrContext extends ExpressionContext {
 		public Token op;
@@ -3961,6 +4321,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpSingleOr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpSingleOr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ExpPowerContext extends ExpressionContext {
@@ -3980,6 +4345,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpPower(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpPower(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ExpMinusOrPlusContext extends ExpressionContext {
 		public Token op;
@@ -3997,6 +4367,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpMinusOrPlus(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpMinusOrPlus(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ExpDoubleAndContext extends ExpressionContext {
@@ -4016,6 +4391,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpDoubleAnd(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpDoubleAnd(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ExpSingleAndContext extends ExpressionContext {
 		public Token op;
@@ -4034,6 +4414,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpSingleAnd(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpSingleAnd(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ExpWaveOrNotContext extends ExpressionContext {
 		public Token op;
@@ -4048,6 +4433,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpWaveOrNot(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpWaveOrNot(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ExpStarOrDivOrModContext extends ExpressionContext {
@@ -4066,6 +4456,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitExpStarOrDivOrMod(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitExpStarOrDivOrMod(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4364,6 +4759,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimaryArrayInitializer(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimaryArrayInitializer(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class PrimarySelfContext extends PrimaryContext {
 		public TerminalNode SELF() { return getToken(RIIF2Parser.SELF, 0); }
@@ -4376,6 +4776,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimarySelf(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimarySelf(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class PrimaryTrueContext extends PrimaryContext {
 		public TerminalNode TRUE() { return getToken(RIIF2Parser.TRUE, 0); }
@@ -4387,6 +4792,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimaryTrue(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimaryTrue(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class PrimaryAISContext extends PrimaryContext {
@@ -4402,6 +4812,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimaryAIS(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimaryAIS(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class PrimaryFalseContext extends PrimaryContext {
 		public TerminalNode FALSE() { return getToken(RIIF2Parser.FALSE, 0); }
@@ -4413,6 +4828,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimaryFalse(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimaryFalse(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class PrimaryParenthesesContext extends PrimaryContext {
@@ -4428,6 +4848,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimaryParentheses(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimaryParentheses(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class PrimaryLiteralContext extends PrimaryContext {
 		public LiteralContext literal() {
@@ -4442,6 +4867,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimaryLiteral(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimaryLiteral(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class PrimaryFuncCallContext extends PrimaryContext {
 		public FuncCallContext funcCall() {
@@ -4455,6 +4885,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimaryFuncCall(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimaryFuncCall(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4574,6 +5009,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitFuncCall(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitFuncCall(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final FuncCallContext funcCall() throws RecognitionException {
@@ -4632,6 +5072,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitFuncName(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitFuncName(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final FuncNameContext funcName() throws RecognitionException {
@@ -4682,6 +5127,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitFuncArg(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitFuncArg(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4745,6 +5195,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitLiteralString(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitLiteralString(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class LiteralFloatingPointContext extends LiteralContext {
 		public TerminalNode FloatingPointLiteral() { return getToken(RIIF2Parser.FloatingPointLiteral, 0); }
@@ -4757,6 +5212,11 @@ public class RIIF2Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitLiteralFloatingPoint(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitLiteralFloatingPoint(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class LiteralDecimalContext extends LiteralContext {
 		public TerminalNode DecimalLiteral() { return getToken(RIIF2Parser.DecimalLiteral, 0); }
@@ -4768,6 +5228,11 @@ public class RIIF2Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitLiteralDecimal(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitLiteralDecimal(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 

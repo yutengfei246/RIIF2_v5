@@ -1,10 +1,7 @@
 package it.polito.yutengfei.RIIF2.parser;
 
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
-import it.polito.yutengfei.RIIF2.factory.ComponentFactory;
-import it.polito.yutengfei.RIIF2.factory.EntityPreparedException;
-import it.polito.yutengfei.RIIF2.factory.EntityValueNotSuitableExpcetion;
-import it.polito.yutengfei.RIIF2.factory.Factory;
+import it.polito.yutengfei.RIIF2.factory.*;
 import it.polito.yutengfei.RIIF2.parser.utilityRecoder.Recoder;
 import it.polito.yutengfei.RIIF2.parser.utilityWrapper.Expression;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -15,12 +12,12 @@ import java.util.List;
 /**
  * Created by yutengfei on 09/12/16.
  */
-public class componentParser extends InitializerParser{
+public class ComponentParser extends InitializerParser{
 
     private ComponentFactory componentFactory = Factory.newComponentFactory();
     private Recoder recoder ;
 
-    public componentParser(RIIF2Parser parser, Recoder recoder){
+    public ComponentParser(RIIF2Parser parser, Recoder recoder){
         super(parser, recoder);
 
         this.recoder =recoder;
@@ -49,7 +46,6 @@ public class componentParser extends InitializerParser{
     @Override
     public void enterImplementsList(RIIF2Parser.ImplementsListContext ctx) {
         List<TerminalNode> Identifiers = ctx.Identifier();
-
         for(TerminalNode Identifier : Identifiers){
             String identifier = Identifier.getText();
             this.componentFactory.setCurrentComponentImplementsIdentifier(identifier);
@@ -141,21 +137,22 @@ public class componentParser extends InitializerParser{
     @Override
     public void enterAttributeIndex(RIIF2Parser.AttributeIndexContext ctx) {
         ParserRuleContext parentContext = ctx.getParent();
+        TerminalNode Identifier = ctx.Identifier();
+        String identifier = Identifier.getText();
 
         if( parentContext instanceof RIIF2Parser.PrimitiveFieldDeclaratorContext){
-            this.componentFactory.setEntityIsAttribute();
+            this.componentFactory.setEntityAttributeIndex(identifier);
         }
     }
 
     @Override
     public void enterAssociativeIndex(RIIF2Parser.AssociativeIndexContext ctx) {
         ParserRuleContext parentContext = ctx.getParent();
+        TerminalNode Identifier = ctx.Identifier();
+        String identifier = Identifier.getText();
 
         if( parentContext instanceof RIIF2Parser.PrimitiveFieldDeclaratorContext ){
-            TerminalNode Identifier = ctx.Identifier();
-            String identifier = Identifier.getText();
-
-            this.componentFactory.setEntityIsAssociativeIndex(identifier);
+            this.componentFactory.setEntityAssociativeIndex(identifier);
         }
     }
 
@@ -193,82 +190,48 @@ public class componentParser extends InitializerParser{
 
     // this method is used only for checking for efficiency because  at the time being the Field( expression ) has not value available
     @Override
-    public void enterFieldInitializer(RIIF2Parser.FieldInitializerContext ctx) {
+    public void exitFieldInitializer(RIIF2Parser.FieldInitializerContext ctx) {
         RIIF2Parser.ListInitializerContext listInitializerContext
                 = ctx.listInitializer();
 
         RIIF2Parser.ExpressionContext expressionContext
                 = ctx.expression();
 
-        RIIF2Parser.ArrayInitializerWrapperContext arrayInitializerContext
+        RIIF2Parser.ArrayInitializerWrapperContext arrayInitializerWrapperContext
                 = ctx.arrayInitializerWrapper();
 
-        if( listInitializerContext != null && this.componentFactory.isEntityList()){}
+        if( listInitializerContext != null && this.componentFactory.isEntityList()){
+            this.componentFactory.setEntityInitializerType(ComponentFactory.LIST_INITIALIZER);
+
+            List<String> listInitializer = super.getListInitializer();
+            this.setEntityInitializer(listInitializer);
+        }
         else{
             //TODO: exception
         }
 
-        if( arrayInitializerContext != null && this.componentFactory.isArrayEntity()){}
+        if( arrayInitializerWrapperContext != null && this.componentFactory.isArrayEntity()){
+            this.componentFactory.setEntityInitializerType(ComponentFactory.ARRAY_INITIALIZER);
+
+            List< List<ArrayItem>  > arrayWrapperInitializer = super.getArrayWrapperInitializer();
+            this.setEntityInitializer( arrayWrapperInitializer );
+        }
         else{
             //TODO: exception
         }
 
-        if( expressionContext != null && this.componentFactory.isPrimitiveEntity()){}
-        else{
-            //TODO: exception
-        }
-    }
+        if( expressionContext != null && this.componentFactory.isPrimitiveEntity()){
+            this.componentFactory.setEntityInitializerType(ComponentFactory.EXPRESSION);
 
-    @Override
-    public void exitListInitializer(RIIF2Parser.ListInitializerContext ctx) {
-        ParserRuleContext parentContext = ctx.getParent();
-
-        if( parentContext instanceof RIIF2Parser.FieldInitializerContext ){
-
-        }
-    }
-
-    @Override
-    public void exitFieldInitializer(RIIF2Parser.FieldInitializerContext ctx) {
-        RIIF2Parser.ExpressionContext expressionContext
-                = ctx.expression();
-
-        if (expressionContext != null) {
             Expression expression = super.getExpression(expressionContext);
-            this.setEntityValue(expression);
+            this.setEntityInitializer( expression);
         }
-    }
-
-    private void setEntityValue(Expression expression) {
-        int expType = expression.getType();
-        try {
-            switch (expType) {
-                case Expression.BOOLEAN:
-                    Boolean valueBoolean = (Boolean) expression.getValue();
-                    this.componentFactory.setEntityValue(valueBoolean);
-                    break;
-                case Expression.FLOAT:
-                    Float valueFloat = (Float) expression.getValue();
-                    this.componentFactory.setEntityValue(valueFloat);
-                    break;
-                case Expression.INTEGER:
-                    Integer valueInteger = (Integer) expression.getValue();
-                    this.componentFactory.setEntityValue(valueInteger);
-                    break;
-                case Expression.STRING:
-                    String valueString = (String) expression.getValue();
-                    this.componentFactory.setEntityValue(valueString);
-                    break;
-                case Expression.SELF:
-                    this.componentFactory.setEntityValue(new ComponentFactory.Self());
-                    break;
-                default:
-                    //TODO: exception
-            }
-        }catch (EntityValueNotSuitableExpcetion e){
+        else{
             //TODO: exception
         }
     }
 
-
+    public void setEntityInitializer(Object initializer) {
+        this.componentFactory.setEntityInitializer( initializer);
+    }
 }
