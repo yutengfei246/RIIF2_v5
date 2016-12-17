@@ -1,11 +1,10 @@
 package it.polito.yutengfei.RIIF2.parser.utilityWrapper;
 
-import it.polito.yutengfei.RIIF2.factory.ArrayItem;
+
+import it.polito.yutengfei.RIIF2.factory.utility.RIIF2Grammar;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
-import java.util.Stack;
 
 /**
  * This expression is lazy mode, which means that only you invoke the method runOperator
@@ -17,12 +16,6 @@ import java.util.Stack;
  * perform the operation that in the operation stack.
  */
 public class Expression {
-    public static final int STRING = 1;
-    public static final int INTEGER = 2;
-    public static final int FLOAT = 3;
-    public static final int BOOLEAN = 4;
-    public static final int SELF = 5;
-    public static final int ARRAY = 6;
 
     public static final int OP_NEGATIVE = 11;
     public static final int OP_POSITIVE = 12;
@@ -47,14 +40,14 @@ public class Expression {
     public static final int OP_ASSIGN = 31;
     public static final int OP_IF_ELSE = 32;
 
-    private int type;
+    private String type;
 
     private Object value;
 
     private Queue<Operation> oprQueue = new LinkedList<>();
     private boolean performed = false;
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -92,15 +85,11 @@ public class Expression {
     }
 
     public boolean isInteger() {
-        this.runOprQueue();
-
-        return this.type == INTEGER ? true : false ;
+        return this.type == RIIF2Grammar.INTEGER ? true : false ;
     }
 
     public boolean isArray() {
-        this.runOprQueue();
-
-        return this.type == ARRAY ? true : false ;
+        return this.type == RIIF2Grammar.ARRAY ? true : false ;
     }
 
     public Object getValue() {
@@ -109,7 +98,7 @@ public class Expression {
         return this.value;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
@@ -123,14 +112,14 @@ public class Expression {
     public boolean isPositiveInteger() {
         this.runOprQueue();
 
-        if( this.type == INTEGER && ( (Integer)this.value ) > 0)
+        if( this.type == RIIF2Grammar.INTEGER && ( (Integer)this.value ) > 0)
             return true;
 
         return false;
     }
 
     private Operation pop(){
-        return this.oprQueue.remove();
+        return this.oprQueue.poll();
     }
 
     public void runOprQueue(){
@@ -300,7 +289,6 @@ public class Expression {
     }
 
     private void oprPlus(Expression oprExpression) {
-
     }
 
 

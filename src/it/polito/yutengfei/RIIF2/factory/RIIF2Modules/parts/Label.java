@@ -1,4 +1,4 @@
-package it.polito.yutengfei.RIIF2.factory.RIIF2Modules;
+package it.polito.yutengfei.RIIF2.factory.RIIF2Modules.parts;
 
 import java.util.ArrayList;
 import java.util.HashMap;

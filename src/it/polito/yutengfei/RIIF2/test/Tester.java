@@ -55,7 +55,7 @@ public class Tester {
 
             secondLevelVisitor.visit(parseTree);
 
-            System.out.println(parseTree.toStringTree());
+            //System.out.println(parseTree.toStringTree());
 
         } catch (IOException e) {}
     }

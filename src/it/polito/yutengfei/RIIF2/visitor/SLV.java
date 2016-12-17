@@ -2,10 +2,9 @@ package it.polito.yutengfei.RIIF2.visitor;
 
 import it.polito.yutengfei.RIIF2.RIIF2BaseVisitor;
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
-import it.polito.yutengfei.RIIF2.factory.Factory;
 import it.polito.yutengfei.RIIF2.parser.ComponentParser;
 import it.polito.yutengfei.RIIF2.parser.TemplateParser;
-import it.polito.yutengfei.RIIF2.parser.utilityRecoder.Recoder;
+import it.polito.yutengfei.RIIF2.parser.utilityRecorder.Recorder;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
@@ -27,8 +26,8 @@ public class SLV extends RIIF2BaseVisitor<Boolean> {
     public SLV (ParseTree parseTree, RIIF2Parser parser){
         this.parser = parser;
         this.parseTree = parseTree;
-        this.componentParser = new ComponentParser(this.parser, new Recoder());
-        this.templateParser = new TemplateParser(this.parser , new Recoder());
+        this.componentParser = new ComponentParser(this.parser, new Recorder());
+        this.templateParser = new TemplateParser(this.parser , new Recorder());
     }
 
     @Override

@@ -2,31 +2,30 @@ package it.polito.yutengfei.RIIF2.parser;
 
 import it.polito.yutengfei.RIIF2.RIIF2BaseListener;
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
-import it.polito.yutengfei.RIIF2.parser.utilityRecoder.Recoder;
+import it.polito.yutengfei.RIIF2.factory.utility.RIIF2Grammar;
+import it.polito.yutengfei.RIIF2.parser.utilityRecorder.Recorder;
 import it.polito.yutengfei.RIIF2.parser.utilityWrapper.Expression;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
-/**
- * Created by yutengfei on 10/12/16.
- */
-public class ExpressionParser extends RIIF2BaseListener {
 
-    private Recoder recoder;
+class ExpressionParser extends RIIF2BaseListener {
+
+    private Recorder recorder;
     private ParseTreeProperty<Expression> expTree = new ParseTreeProperty<>();
 
     private final RIIF2Parser parser;
 
-    public ExpressionParser(RIIF2Parser parser, Recoder recoder){
-        this.recoder = recoder;
+    ExpressionParser(RIIF2Parser parser, Recorder recorder){
+        this.recorder = recorder;
         this.parser = parser;
     }
 
-    public Expression getExpression(ParseTree node){
+    Expression getExpression(ParseTree node){
         return this.expTree.get(node);
     }
 
-    public void putExpression(ParseTree node , Expression expression){
+    void putExpression(ParseTree node, Expression expression){
         this.expTree.put(node,expression);
     }
 
@@ -35,7 +34,7 @@ public class ExpressionParser extends RIIF2BaseListener {
         Expression expression = new Expression();
 
         String value = ctx.getText();
-        expression.setType(Expression.STRING);
+        expression.setType(RIIF2Grammar.STRING);
         expression.setValue(value);
 
         this.putExpression(ctx,expression);
@@ -46,7 +45,7 @@ public class ExpressionParser extends RIIF2BaseListener {
         Expression expression = new Expression();
 
         int value = Integer.valueOf( ctx.getText() );
-        expression.setType(Expression.INTEGER);
+        expression.setType(RIIF2Grammar.INTEGER);
         expression.setValue(value);
 
         this.putExpression(ctx,expression);
@@ -56,8 +55,8 @@ public class ExpressionParser extends RIIF2BaseListener {
     public void exitLiteralFloatingPoint(RIIF2Parser.LiteralFloatingPointContext ctx) {
         Expression expression = new Expression();
 
-        float value = Float.valueOf( ctx.getText() );
-        expression.setType(Expression.FLOAT);
+        double value = Double.valueOf( ctx.getText() );
+        expression.setType(RIIF2Grammar.DOUBLE);
         expression.setValue(value);
 
         this.putExpression(ctx,expression);
@@ -78,7 +77,7 @@ public class ExpressionParser extends RIIF2BaseListener {
     @Override
     public void exitPrimaryFalse(RIIF2Parser.PrimaryFalseContext ctx) {
         Expression expression = new Expression();
-        expression.setValue(Expression.BOOLEAN);
+        expression.setValue(RIIF2Grammar.BOOLEAN);
         expression.setValue(false);
         this.putExpression(ctx,expression);
     }
@@ -86,7 +85,7 @@ public class ExpressionParser extends RIIF2BaseListener {
     @Override
     public void exitPrimaryTrue(RIIF2Parser.PrimaryTrueContext ctx) {
         Expression expression = new Expression();
-        expression.setType(Expression.BOOLEAN);
+        expression.setType(RIIF2Grammar.BOOLEAN);
         expression.setValue(true);
         this.putExpression(ctx,expression);
     }
@@ -94,7 +93,7 @@ public class ExpressionParser extends RIIF2BaseListener {
     @Override
     public void exitPrimarySelf(RIIF2Parser.PrimarySelfContext ctx) {
         Expression expression = new Expression();
-        expression.setType(Expression.SELF);
+        expression.setType(RIIF2Grammar.SELF);
         this.putExpression(ctx,expression);
     }
 
@@ -341,7 +340,7 @@ public class ExpressionParser extends RIIF2BaseListener {
         Expression middleExp = this.getExpression(ctx.expression(1));
         Expression rightExp = this.getExpression(ctx.expression(2));
 
-        Expression expression = null;
+        Expression expression;
         expression = leftExp.operation(Expression.OP_IF_ELSE, middleExp,rightExp);
 
         this.putExpression(ctx,expression);

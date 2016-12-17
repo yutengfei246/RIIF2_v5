@@ -1,8 +1,9 @@
 package it.polito.yutengfei.RIIF2.parser;
 
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
-import it.polito.yutengfei.RIIF2.factory.ArrayItem;
-import it.polito.yutengfei.RIIF2.parser.utilityRecoder.Recoder;
+import it.polito.yutengfei.RIIF2.parser.utilityWrapper.ArrayItem;
+import it.polito.yutengfei.RIIF2.factory.utility.RIIF2Grammar;
+import it.polito.yutengfei.RIIF2.parser.utilityRecorder.Recorder;
 import it.polito.yutengfei.RIIF2.parser.utilityWrapper.Expression;
 import it.polito.yutengfei.RIIF2.parser.utilityWrapper.Row;
 import it.polito.yutengfei.RIIF2.parser.utilityWrapper.RowItem;
@@ -17,11 +18,11 @@ import java.util.List;
 public class InitializerParser extends ExpressionParser {
 
 
-    private Recoder recoder;
+    private Recorder recorder;
 
-    public InitializerParser(RIIF2Parser parser, Recoder recoder) {
-        super(parser, recoder);
-        this.recoder = recoder;
+    public InitializerParser(RIIF2Parser parser, Recorder recorder) {
+        super(parser, recorder);
+        this.recorder = recorder;
     }
 
 
@@ -139,7 +140,7 @@ public class InitializerParser extends ExpressionParser {
         ParserRuleContext parentContext = ctx.getParent();
         if(parentContext instanceof RIIF2Parser.PrimaryContext){
             Expression expression = new Expression();
-            expression.setType(Expression.ARRAY);
+            expression.setType(RIIF2Grammar.ARRAY);
             expression.setValue(this.getArrayInitializer());
             super.putExpression(ctx,expression);
         }

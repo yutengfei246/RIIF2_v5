@@ -1,4 +1,4 @@
-package it.polito.yutengfei.RIIF2.parser.utilityRecoder;
+package it.polito.yutengfei.RIIF2.parser.utilityRecorder;
 
 /**
  * This class recode the runtime variable like
@@ -11,7 +11,7 @@ package it.polito.yutengfei.RIIF2.parser.utilityRecoder;
  *
  * creating database for storing the passed variable into library
  *
- * At this moment, the Recoder class can not be distoried at the time running.
+ * At this moment, the Recorder class can not be distroied at the time running.
  */
-public class Recoder {
+public class Recorder {
 }

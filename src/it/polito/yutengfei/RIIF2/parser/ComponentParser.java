@@ -2,25 +2,25 @@ package it.polito.yutengfei.RIIF2.parser;
 
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
 import it.polito.yutengfei.RIIF2.factory.*;
-import it.polito.yutengfei.RIIF2.parser.utilityRecoder.Recoder;
+import it.polito.yutengfei.RIIF2.factory.utility.RIIF2Grammar;
+import it.polito.yutengfei.RIIF2.parser.utilityRecorder.Recorder;
+import it.polito.yutengfei.RIIF2.parser.utilityWrapper.ArrayItem;
 import it.polito.yutengfei.RIIF2.parser.utilityWrapper.Expression;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.List;
 
-/**
- * Created by yutengfei on 09/12/16.
- */
+
 public class ComponentParser extends InitializerParser{
 
     private ComponentFactory componentFactory = Factory.newComponentFactory();
-    private Recoder recoder ;
+    private Recorder recorder; //TODO: recorder
 
-    public ComponentParser(RIIF2Parser parser, Recoder recoder){
-        super(parser, recoder);
+    public ComponentParser(RIIF2Parser parser, Recorder recorder){
+        super(parser, recorder);
 
-        this.recoder =recoder;
+        this.recorder = recorder;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ComponentParser extends InitializerParser{
     @Override
     public void enterFieldDeclaration(RIIF2Parser.FieldDeclarationContext ctx) {
         try {
-            this.componentFactory.prepare(ComponentFactory.FIELD);
+            this.componentFactory.prepare(RIIF2Grammar.FIELD);
         } catch (EntityPreparedException e) {
             e.printStackTrace();
             //TODO: exception
@@ -69,7 +69,7 @@ public class ComponentParser extends InitializerParser{
 
         if (parameter != null)
             try {
-                this.componentFactory.prepareField(ComponentFactory.PARAMETER);
+                this.componentFactory.prepareField(RIIF2Grammar.PARAMETER);
             } catch (EntityPreparedException e) {
                 e.printStackTrace();
                 //TODO: exception
@@ -77,7 +77,7 @@ public class ComponentParser extends InitializerParser{
 
         if (constant != null)
             try {
-                this.componentFactory.prepareField(ComponentFactory.CONSTANT);
+                this.componentFactory.prepareField(RIIF2Grammar.CONSTANT);
             } catch (EntityPreparedException e) {
                 e.printStackTrace();
                 //TODO: exception
@@ -93,8 +93,8 @@ public class ComponentParser extends InitializerParser{
     }
 
     @Override
-    public void enterAssociativeId(RIIF2Parser.AssociativeIdContext ctx) {
-        this.componentFactory.setEntityTypeType(ComponentFactory.TYPE_ASSOCIATIVE);
+    public void enterAssociativeType(RIIF2Parser.AssociativeTypeContext ctx) {
+        this.componentFactory.setEntityTypeType(RIIF2Grammar.TYPE_TYPE_ASSOCIATIVE);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class ComponentParser extends InitializerParser{
         ParserRuleContext parentContext = ctx.getParent();
 
         if( parentContext instanceof RIIF2Parser.TypeTypeContext){
-            this.componentFactory.setEntityTypeType(ComponentFactory.TYPE_VECTOR);
+            this.componentFactory.setEntityTypeType(RIIF2Grammar.TYPE_TYPE_VECTOR);
         }
     }
 
@@ -160,17 +160,17 @@ public class ComponentParser extends InitializerParser{
     public void enterPrimitiveType(RIIF2Parser.PrimitiveTypeContext ctx) {
 
         if( ctx.TYPE_BOOLEAN() != null )
-            this.componentFactory.setEntityType(ComponentFactory.BOOLEAN);
+            this.componentFactory.setEntityType(RIIF2Grammar.BOOLEAN);
         if( ctx.TYPE_FLOAT() != null)
-            this.componentFactory.setEntityType(ComponentFactory.FLOAT);
+            this.componentFactory.setEntityType(RIIF2Grammar.DOUBLE);
         if( ctx.TYPE_INTEGER() != null)
-            this.componentFactory.setEntityType(ComponentFactory.INTEGER);
+            this.componentFactory.setEntityType(RIIF2Grammar.INTEGER);
         if( ctx.TYPE_STRING() != null )
-            this.componentFactory.setEntityType(ComponentFactory.STRING);
+            this.componentFactory.setEntityType(RIIF2Grammar.STRING);
         if( ctx.TYPE_TIME() != null)
-            this.componentFactory.setEntityType(ComponentFactory.TIME);
+            this.componentFactory.setEntityType(RIIF2Grammar.TIME);
         if( ctx.Identifier() != null) {
-            this.componentFactory.setEntityType(ComponentFactory.USER_DEFINED);
+            this.componentFactory.setEntityType(RIIF2Grammar.USER_DEFINED);
 
             String identifier = ctx.Identifier().getText();
             this.componentFactory.setEntityTypeDefinedByUser( identifier );
@@ -179,7 +179,7 @@ public class ComponentParser extends InitializerParser{
 
     @Override
     public void enterEnumType(RIIF2Parser.EnumTypeContext ctx) {
-        this.componentFactory.setEntityType(ComponentFactory.ENUM);
+        this.componentFactory.setEntityType(RIIF2Grammar.ENUM);
 
         List<TerminalNode> items = ctx.Identifier();
         for (TerminalNode item : items ){
@@ -200,8 +200,8 @@ public class ComponentParser extends InitializerParser{
         RIIF2Parser.ArrayInitializerWrapperContext arrayInitializerWrapperContext
                 = ctx.arrayInitializerWrapper();
 
-        if( listInitializerContext != null && this.componentFactory.isEntityList()){
-            this.componentFactory.setEntityInitializerType(ComponentFactory.LIST_INITIALIZER);
+        if( listInitializerContext != null ){
+            this.componentFactory.setEntityInitializerType(RIIF2Grammar.LIST_INITIALIZER);
 
             List<String> listInitializer = super.getListInitializer();
             this.setEntityInitializer(listInitializer);
@@ -210,8 +210,8 @@ public class ComponentParser extends InitializerParser{
             //TODO: exception
         }
 
-        if( arrayInitializerWrapperContext != null && this.componentFactory.isArrayEntity()){
-            this.componentFactory.setEntityInitializerType(ComponentFactory.ARRAY_INITIALIZER);
+        if( arrayInitializerWrapperContext != null ){
+            this.componentFactory.setEntityInitializerType(RIIF2Grammar.ARRAY_INITIALIZER);
 
             List< List<ArrayItem>  > arrayWrapperInitializer = super.getArrayWrapperInitializer();
             this.setEntityInitializer( arrayWrapperInitializer );
@@ -220,8 +220,8 @@ public class ComponentParser extends InitializerParser{
             //TODO: exception
         }
 
-        if( expressionContext != null && this.componentFactory.isPrimitiveEntity()){
-            this.componentFactory.setEntityInitializerType(ComponentFactory.EXPRESSION);
+        if( expressionContext != null ){
+            this.componentFactory.setEntityInitializerType(RIIF2Grammar.EXPRESSION);
 
             Expression expression = super.getExpression(expressionContext);
             this.setEntityInitializer( expression);
@@ -233,5 +233,19 @@ public class ComponentParser extends InitializerParser{
 
     public void setEntityInitializer(Object initializer) {
         this.componentFactory.setEntityInitializer( initializer);
+    }
+
+
+
+    @Override
+    public void exitFieldDeclaration(RIIF2Parser.FieldDeclarationContext ctx) {
+        this.componentFactory.assembleEntity();
+        this.componentFactory.cleanEntity();
+    }
+
+    @Override
+    public void exitComponentDeclaration(RIIF2Parser.ComponentDeclarationContext ctx) {
+        this.componentFactory.commit();
+        this.componentFactory.productComponent();
     }
 }
