@@ -1,13 +1,14 @@
 package it.polito.yutengfei.RIIF2.parser;
 
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
-import it.polito.yutengfei.RIIF2.parser.utilityRecorder.Recorder;
+import it.polito.yutengfei.RIIF2.recoder.RIIF2Recorder;
+import it.polito.yutengfei.RIIF2.recoder.Recorder;
 
 /**
  * Created by yutengfei on 11/12/16.
  */
 public class TemplateParser extends  InitializerParser{
-    public TemplateParser(RIIF2Parser parser, Recorder recorder) {
-        super(parser, recorder);
+    public TemplateParser(RIIF2Parser parser, RIIF2Recorder recorder) {
+        super(parser);
     }
 }

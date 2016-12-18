@@ -2,22 +2,20 @@ package it.polito.yutengfei.RIIF2.parser;
 
 import it.polito.yutengfei.RIIF2.RIIF2BaseListener;
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
-import it.polito.yutengfei.RIIF2.factory.utility.RIIF2Grammar;
-import it.polito.yutengfei.RIIF2.parser.utilityRecorder.Recorder;
-import it.polito.yutengfei.RIIF2.parser.utilityWrapper.Expression;
+import it.polito.yutengfei.RIIF2.util.RIIF2Grammar;
+import it.polito.yutengfei.RIIF2.recoder.Recorder;
+import it.polito.yutengfei.RIIF2.util.utilityWrapper.Expression;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
 
 class ExpressionParser extends RIIF2BaseListener {
 
-    private Recorder recorder;
     private ParseTreeProperty<Expression> expTree = new ParseTreeProperty<>();
 
     private final RIIF2Parser parser;
 
-    ExpressionParser(RIIF2Parser parser, Recorder recorder){
-        this.recorder = recorder;
+    ExpressionParser(RIIF2Parser parser){
         this.parser = parser;
     }
 

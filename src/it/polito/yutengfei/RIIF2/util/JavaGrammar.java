@@ -1,4 +1,4 @@
-package it.polito.yutengfei.RIIF2.factory.utility;
+package it.polito.yutengfei.RIIF2.util;
 
 /**
  * Created by yutengfei on 17/12/16.

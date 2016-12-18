@@ -1,10 +1,7 @@
-component myComponent extends myCom1, myCom2 implements temp1, temp2;
-parameter myPar : float := 10.0 + 2.5 ;
-parameter myParAssoc[] : float := {it, is};
-parameter myParVector[2:2] :float := {[1.0,1.0],[2.0,2.0]};
-parameter myPar[id] := 10.0;
-parameter myPar'atrr : float := 10.0;
-parameter myPar[id]'attr : float := 10.0;
+component e1;
+endcomponent
 
-constant myConstant : float := 10.0;
+component myComponent extends e1;
+parameter myPar : float := 10.0 + 2.5 ;
+parameter myPar1 : integer := 20;
 endcomponent

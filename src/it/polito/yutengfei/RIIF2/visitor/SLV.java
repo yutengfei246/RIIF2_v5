@@ -4,7 +4,7 @@ import it.polito.yutengfei.RIIF2.RIIF2BaseVisitor;
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
 import it.polito.yutengfei.RIIF2.parser.ComponentParser;
 import it.polito.yutengfei.RIIF2.parser.TemplateParser;
-import it.polito.yutengfei.RIIF2.parser.utilityRecorder.Recorder;
+import it.polito.yutengfei.RIIF2.recoder.RIIF2Recorder;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
@@ -17,8 +17,10 @@ public class SLV extends RIIF2BaseVisitor<Boolean> {
     private final ParseTree parseTree;
     private final RIIF2Parser parser;
 
-    private final ComponentParser componentParser;
-    private final TemplateParser templateParser;
+    private RIIF2Recorder recorder = new RIIF2Recorder();
+
+    private ComponentParser componentParser = null;
+    private TemplateParser templateParser = null;
 
     private int moduleCounter = -1;
     private final ParseTreeWalker walker = new ParseTreeWalker();
@@ -26,18 +28,19 @@ public class SLV extends RIIF2BaseVisitor<Boolean> {
     public SLV (ParseTree parseTree, RIIF2Parser parser){
         this.parser = parser;
         this.parseTree = parseTree;
-        this.componentParser = new ComponentParser(this.parser, new Recorder());
-        this.templateParser = new TemplateParser(this.parser , new Recorder());
     }
 
     @Override
     public Boolean visitComponentDeclaration(RIIF2Parser.ComponentDeclarationContext ctx) {
         super.visitComponentDeclaration(ctx);
 
+        this.componentParser = new ComponentParser(this.parser,this.recorder);
+
         this.moduleCounter++;
         ParseTree componentTree = this.parseTree.getChild(this.moduleCounter);
         walker.walk(this.componentParser,componentTree);
 
+        this.recorder = this.componentParser.getRIIF2Recorder();
         return true;
     }
 
@@ -45,6 +48,8 @@ public class SLV extends RIIF2BaseVisitor<Boolean> {
     @Override
     public Boolean visitTemplateDeclaration(RIIF2Parser.TemplateDeclarationContext ctx) {
         super.visitTemplateDeclaration(ctx);
+
+        this.templateParser = new TemplateParser(this.parser,recorder);
 
         this.moduleCounter++;
         ParseTree templateTree = this.parseTree.getChild(this.moduleCounter);

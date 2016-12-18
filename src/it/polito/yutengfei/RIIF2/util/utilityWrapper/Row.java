@@ -1,4 +1,4 @@
-package it.polito.yutengfei.RIIF2.parser.utilityWrapper;
+package it.polito.yutengfei.RIIF2.util.utilityWrapper;
 
 /**
  *

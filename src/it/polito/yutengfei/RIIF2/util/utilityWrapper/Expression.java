@@ -1,7 +1,7 @@
-package it.polito.yutengfei.RIIF2.parser.utilityWrapper;
+package it.polito.yutengfei.RIIF2.util.utilityWrapper;
 
 
-import it.polito.yutengfei.RIIF2.factory.utility.RIIF2Grammar;
+import it.polito.yutengfei.RIIF2.util.RIIF2Grammar;
 
 import java.util.LinkedList;
 import java.util.Queue;

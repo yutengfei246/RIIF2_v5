@@ -1,12 +1,12 @@
 package it.polito.yutengfei.RIIF2.parser;
 
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
-import it.polito.yutengfei.RIIF2.parser.utilityWrapper.ArrayItem;
-import it.polito.yutengfei.RIIF2.factory.utility.RIIF2Grammar;
-import it.polito.yutengfei.RIIF2.parser.utilityRecorder.Recorder;
-import it.polito.yutengfei.RIIF2.parser.utilityWrapper.Expression;
-import it.polito.yutengfei.RIIF2.parser.utilityWrapper.Row;
-import it.polito.yutengfei.RIIF2.parser.utilityWrapper.RowItem;
+import it.polito.yutengfei.RIIF2.util.utilityWrapper.ArrayItem;
+import it.polito.yutengfei.RIIF2.util.RIIF2Grammar;
+import it.polito.yutengfei.RIIF2.recoder.Recorder;
+import it.polito.yutengfei.RIIF2.util.utilityWrapper.Expression;
+import it.polito.yutengfei.RIIF2.util.utilityWrapper.Row;
+import it.polito.yutengfei.RIIF2.util.utilityWrapper.RowItem;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
@@ -17,12 +17,8 @@ import java.util.List;
 
 public class InitializerParser extends ExpressionParser {
 
-
-    private Recorder recorder;
-
-    public InitializerParser(RIIF2Parser parser, Recorder recorder) {
-        super(parser, recorder);
-        this.recorder = recorder;
+    public InitializerParser(RIIF2Parser parser) {
+        super(parser);
     }
 
 

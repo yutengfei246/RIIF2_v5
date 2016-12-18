@@ -57,6 +57,8 @@ public class Tester {
 
             //System.out.println(parseTree.toStringTree());
 
+            System.out.println("Parser OK");
+
         } catch (IOException e) {}
     }
 }

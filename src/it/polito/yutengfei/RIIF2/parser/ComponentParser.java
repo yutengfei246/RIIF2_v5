@@ -2,25 +2,24 @@ package it.polito.yutengfei.RIIF2.parser;
 
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
 import it.polito.yutengfei.RIIF2.factory.*;
-import it.polito.yutengfei.RIIF2.factory.utility.RIIF2Grammar;
-import it.polito.yutengfei.RIIF2.parser.utilityRecorder.Recorder;
-import it.polito.yutengfei.RIIF2.parser.utilityWrapper.ArrayItem;
-import it.polito.yutengfei.RIIF2.parser.utilityWrapper.Expression;
+import it.polito.yutengfei.RIIF2.recoder.RIIF2Recorder;
+import it.polito.yutengfei.RIIF2.recoder.Recorder;
+import it.polito.yutengfei.RIIF2.util.RIIF2Grammar;
+import it.polito.yutengfei.RIIF2.util.utilityWrapper.ArrayItem;
+import it.polito.yutengfei.RIIF2.util.utilityWrapper.Expression;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.List;
 
 
-public class ComponentParser extends InitializerParser{
+public class ComponentParser extends InitializerParser implements Recorder {
 
-    private ComponentFactory componentFactory = Factory.newComponentFactory();
-    private Recorder recorder; //TODO: recorder
+    private ComponentFactory componentFactory = null;
 
-    public ComponentParser(RIIF2Parser parser, Recorder recorder){
-        super(parser, recorder);
-
-        this.recorder = recorder;
+    public ComponentParser(RIIF2Parser parser, RIIF2Recorder recorder){
+        super(parser);
+        this.componentFactory = Factory.newComponentFactory(recorder);
     }
 
     @Override
@@ -36,6 +35,9 @@ public class ComponentParser extends InitializerParser{
     @Override
     public void enterExtendsList(RIIF2Parser.ExtendsListContext ctx) {
         List<TerminalNode>  Identifiers = ctx.Identifier();
+
+        if( Identifiers.size() != 0)
+            this.componentFactory.startImplEx();
 
         for (TerminalNode Identifier : Identifiers){
             String identifier = Identifier.getText();
@@ -53,13 +55,13 @@ public class ComponentParser extends InitializerParser{
     }
 
     @Override
+    public void exitImplementsList(RIIF2Parser.ImplementsListContext ctx) {
+        this.componentFactory.commitImplEx();
+    }
+
+    @Override
     public void enterFieldDeclaration(RIIF2Parser.FieldDeclarationContext ctx) {
-        try {
-            this.componentFactory.prepare(RIIF2Grammar.FIELD);
-        } catch (EntityPreparedException e) {
-            e.printStackTrace();
-            //TODO: exception
-        }
+        this.componentFactory.startField();
     }
 
     @Override
@@ -68,20 +70,14 @@ public class ComponentParser extends InitializerParser{
         TerminalNode constant = ctx.CONSTANT();
 
         if (parameter != null)
-            try {
-                this.componentFactory.prepareField(RIIF2Grammar.PARAMETER);
-            } catch (EntityPreparedException e) {
-                e.printStackTrace();
-                //TODO: exception
-            }
-
+            this.componentFactory.setFieldType( RIIF2Grammar.PARAMETER );
         if (constant != null)
-            try {
-                this.componentFactory.prepareField(RIIF2Grammar.CONSTANT);
-            } catch (EntityPreparedException e) {
-                e.printStackTrace();
-                //TODO: exception
-            }
+            this.componentFactory.setFieldType( RIIF2Grammar.CONSTANT );
+    }
+
+    @Override
+    public void enterPrimitiveFieldDeclarator(RIIF2Parser.PrimitiveFieldDeclaratorContext ctx) {
+        this.componentFactory.setFieldAttribute(false);
     }
 
     @Override
@@ -89,12 +85,12 @@ public class ComponentParser extends InitializerParser{
         TerminalNode Identifier = ctx.Identifier();
         String identifier = Identifier.getText();
 
-        this.componentFactory.setEntityIdentifier( identifier );
+        this.componentFactory.setFieldIdentifier( identifier );
     }
 
     @Override
     public void enterAssociativeType(RIIF2Parser.AssociativeTypeContext ctx) {
-        this.componentFactory.setEntityTypeType(RIIF2Grammar.TYPE_TYPE_ASSOCIATIVE);
+        this.componentFactory.setFieldTypeType(RIIF2Grammar.TYPE_TYPE_ASSOCIATIVE);
     }
 
     @Override
@@ -102,7 +98,7 @@ public class ComponentParser extends InitializerParser{
         ParserRuleContext parentContext = ctx.getParent();
 
         if( parentContext instanceof RIIF2Parser.TypeTypeContext){
-            this.componentFactory.setEntityTypeType(RIIF2Grammar.TYPE_TYPE_VECTOR);
+            this.componentFactory.setFieldTypeType(RIIF2Grammar.TYPE_TYPE_VECTOR);
         }
     }
 
@@ -129,7 +125,7 @@ public class ComponentParser extends InitializerParser{
 
             int vecLeft = (Integer)expLeft.getValue();
             int vecRight = (Integer)expRight.getValue();
-            this.componentFactory.setEntityVector(vecLeft,vecRight);
+            this.componentFactory.setFieldVector(vecLeft,vecRight);
         }
 
     }
@@ -141,7 +137,8 @@ public class ComponentParser extends InitializerParser{
         String identifier = Identifier.getText();
 
         if( parentContext instanceof RIIF2Parser.PrimitiveFieldDeclaratorContext){
-            this.componentFactory.setEntityAttributeIndex(identifier);
+            this.componentFactory.setFieldAttribute(true);
+            this.componentFactory.setFieldAttributeIndex(identifier);
         }
     }
 
@@ -152,7 +149,8 @@ public class ComponentParser extends InitializerParser{
         String identifier = Identifier.getText();
 
         if( parentContext instanceof RIIF2Parser.PrimitiveFieldDeclaratorContext ){
-            this.componentFactory.setEntityAssociativeIndex(identifier);
+            this.componentFactory.setFieldAssociative(true);
+            this.componentFactory.setFieldAssociativeIndex(identifier);
         }
     }
 
@@ -160,37 +158,36 @@ public class ComponentParser extends InitializerParser{
     public void enterPrimitiveType(RIIF2Parser.PrimitiveTypeContext ctx) {
 
         if( ctx.TYPE_BOOLEAN() != null )
-            this.componentFactory.setEntityType(RIIF2Grammar.BOOLEAN);
+            this.componentFactory.setFieldVariableType(RIIF2Grammar.BOOLEAN);
         if( ctx.TYPE_FLOAT() != null)
-            this.componentFactory.setEntityType(RIIF2Grammar.DOUBLE);
+            this.componentFactory.setFieldVariableType(RIIF2Grammar.DOUBLE);
         if( ctx.TYPE_INTEGER() != null)
-            this.componentFactory.setEntityType(RIIF2Grammar.INTEGER);
+            this.componentFactory.setFieldVariableType(RIIF2Grammar.INTEGER);
         if( ctx.TYPE_STRING() != null )
-            this.componentFactory.setEntityType(RIIF2Grammar.STRING);
+            this.componentFactory.setFieldVariableType(RIIF2Grammar.STRING);
         if( ctx.TYPE_TIME() != null)
-            this.componentFactory.setEntityType(RIIF2Grammar.TIME);
+            this.componentFactory.setFieldVariableType(RIIF2Grammar.TIME);
         if( ctx.Identifier() != null) {
-            this.componentFactory.setEntityType(RIIF2Grammar.USER_DEFINED);
-
             String identifier = ctx.Identifier().getText();
-            this.componentFactory.setEntityTypeDefinedByUser( identifier );
+            this.componentFactory.setFieldVariableType(RIIF2Grammar.USER_DEFINED,identifier);
         }
     }
 
     @Override
     public void enterEnumType(RIIF2Parser.EnumTypeContext ctx) {
-        this.componentFactory.setEntityType(RIIF2Grammar.ENUM);
+        this.componentFactory.setFieldVariableType(RIIF2Grammar.ENUM);
 
         List<TerminalNode> items = ctx.Identifier();
         for (TerminalNode item : items ){
             String enumName = item.getText();
-            this.componentFactory.setEntityEnumType(enumName);
+            this.componentFactory.addFieldEnumType(enumName);
         }
     }
 
-    // this method is used only for checking for efficiency because  at the time being the Field( expression ) has not value available
     @Override
     public void exitFieldInitializer(RIIF2Parser.FieldInitializerContext ctx) {
+        ParserRuleContext parentContext = ctx.getParent();
+
         RIIF2Parser.ListInitializerContext listInitializerContext
                 = ctx.listInitializer();
 
@@ -200,52 +197,44 @@ public class ComponentParser extends InitializerParser{
         RIIF2Parser.ArrayInitializerWrapperContext arrayInitializerWrapperContext
                 = ctx.arrayInitializerWrapper();
 
-        if( listInitializerContext != null ){
-            this.componentFactory.setEntityInitializerType(RIIF2Grammar.LIST_INITIALIZER);
+        if( parentContext instanceof RIIF2Parser.PrimitiveFieldDeclaratorContext) {
+            if (listInitializerContext != null) {
+                this.componentFactory.setFieldInitializerType(RIIF2Grammar.LIST_INITIALIZER);
 
-            List<String> listInitializer = super.getListInitializer();
-            this.setEntityInitializer(listInitializer);
-        }
-        else{
-            //TODO: exception
-        }
+                List<String> listInitializer = super.getListInitializer();
+                this.componentFactory.setFieldInitializer(listInitializer);
+            }
 
-        if( arrayInitializerWrapperContext != null ){
-            this.componentFactory.setEntityInitializerType(RIIF2Grammar.ARRAY_INITIALIZER);
+            if (arrayInitializerWrapperContext != null) {
+                this.componentFactory.setFieldInitializerType(RIIF2Grammar.ARRAY_INITIALIZER);
 
-            List< List<ArrayItem>  > arrayWrapperInitializer = super.getArrayWrapperInitializer();
-            this.setEntityInitializer( arrayWrapperInitializer );
-        }
-        else{
-            //TODO: exception
-        }
+                List<List<ArrayItem>> arrayWrapperInitializer = super.getArrayWrapperInitializer();
+                this.componentFactory.setFieldInitializer(arrayWrapperInitializer);
+            }
 
-        if( expressionContext != null ){
-            this.componentFactory.setEntityInitializerType(RIIF2Grammar.EXPRESSION);
+            if (expressionContext != null) {
+                this.componentFactory.setFieldInitializerType(RIIF2Grammar.EXPRESSION);
 
-            Expression expression = super.getExpression(expressionContext);
-            this.setEntityInitializer( expression);
-        }
-        else{
-            //TODO: exception
+                Expression expression = super.getExpression(expressionContext);
+                this.componentFactory.setFieldInitializer(expression);
+            }
         }
     }
-
-    public void setEntityInitializer(Object initializer) {
-        this.componentFactory.setEntityInitializer( initializer);
-    }
-
-
 
     @Override
     public void exitFieldDeclaration(RIIF2Parser.FieldDeclarationContext ctx) {
-        this.componentFactory.assembleEntity();
-        this.componentFactory.cleanEntity();
+        this.componentFactory.commitField();
     }
 
     @Override
     public void exitComponentDeclaration(RIIF2Parser.ComponentDeclarationContext ctx) {
         this.componentFactory.commit();
         this.componentFactory.productComponent();
+    }
+
+
+    @Override
+    public RIIF2Recorder getRIIF2Recorder() {
+        return this.componentFactory.getRIIF2Recorder();
     }
 }
