@@ -164,12 +164,12 @@ public class FieldFactory implements Factory {
     private void newField() throws FieldTypeNotMarchException {
         if ( this.fieldType == RIIF2Grammar.PARAMETER ) {
             this.fieldLabel = new Parameter<>();
-            this.recorder.addParameter( this.fieldLabel );
+            this.recorder.addParameter( this.fieldLabel /* Record this parameter */);
         }
 
         if ( this.fieldType == RIIF2Grammar.CONSTANT ) {
             this.fieldLabel = new Constant<>();
-            this.recorder.addConstant( this.fieldLabel );
+            this.recorder.addConstant( this.fieldLabel /* Record this constant */);
         }
 
         this.fieldLabel.setName( this.identifier );
@@ -182,7 +182,6 @@ public class FieldFactory implements Factory {
                     || Objects.equals(this.type, RIIF2Grammar.INTEGER)
                     || Objects.equals(this.type, RIIF2Grammar.STRING) ) ) {
 
-                System.out.println(" type " + this.type);
                 throw new FieldTypeNotMarchException();
             }
 

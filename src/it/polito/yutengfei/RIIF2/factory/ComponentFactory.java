@@ -27,6 +27,7 @@ public class ComponentFactory implements Factory {
 
     public void setCurrentComponentIdentifier(String identifier) {
         this.component.setIdentifier( identifier );
+        this.recorder.setIdentifier(identifier);
     }
 
     public void startImplEx() {
@@ -115,7 +116,7 @@ public class ComponentFactory implements Factory {
             e.printStackTrace();
         }
         this.recorder = this.fieldFactory.getRIIF2Recorder();
-        this.fieldFactory = null;
+        this.fieldFactory = null /*Reset the fieldFactory*/;
     }
 
     public void commit() {

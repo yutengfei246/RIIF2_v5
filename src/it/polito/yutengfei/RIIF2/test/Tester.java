@@ -2,6 +2,8 @@ package it.polito.yutengfei.RIIF2.test;
 
 import it.polito.yutengfei.RIIF2.RIIF2Lexer;
 import it.polito.yutengfei.RIIF2.RIIF2Parser;
+import it.polito.yutengfei.RIIF2.recoder.RIIF2Recorder;
+import it.polito.yutengfei.RIIF2.recoder.Recorder;
 import it.polito.yutengfei.RIIF2.visitor.SLV;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -55,8 +57,10 @@ public class Tester {
 
             secondLevelVisitor.visit(parseTree);
 
-            //System.out.println(parseTree.toStringTree());
+            RIIF2Recorder recorder = secondLevelVisitor.getRIIF2Recorder();
 
+            //System.out.println(parseTree.toStringTree());
+            recorder.print( 0 );
             System.out.println("Parser OK");
 
         } catch (IOException e) {}

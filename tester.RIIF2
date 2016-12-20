@@ -1,4 +1,5 @@
 component e1;
+parameter myPPP : float := 10.0 ;
 endcomponent
 
 component myComponent extends e1;
