@@ -4,23 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class URI {
+    private static final int HIER = 1;
+
     private final String uriName;
-    private final List<String> hiers ;
+    private final List<String> hiers = new ArrayList<>();
 
     public URI(String identifier) {
         this.uriName = identifier;
-        this.hiers = new ArrayList<>();
     }
 
     public URI(URI childURI) {
         this.uriName = childURI.getUriName();
-        this.hiers = new ArrayList<>();
     }
 
-    public URI(URI childURI, String identifier) {
+    public URI(URI childURI, int hier, String identifier) {
         this.uriName = childURI.getUriName();
-        this.hiers = new ArrayList<>(childURI.getHiers());
-        this.hiers.add(identifier);
+        if (hier == this.HIER) {
+            this.hiers.addAll(childURI.getHiers());
+            this.hiers.add(identifier);
+        }
     }
 
     public static URI fromText(String identifier) {
@@ -36,7 +38,7 @@ public class URI {
     }
 
     public static URI uri2HierX(URI childURI, String identifier) {
-        return new URI(childURI,identifier);
+        return new URI(childURI,HIER,identifier);
     }
 
     public List< String > getHiers() {
