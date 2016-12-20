@@ -13,7 +13,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.List;
 
 
-public class ComponentParser extends InitializerParser implements Recorder {
+public class ComponentParser extends IdentifierParser implements Recorder {
 
     private ComponentFactory componentFactory = null;
 

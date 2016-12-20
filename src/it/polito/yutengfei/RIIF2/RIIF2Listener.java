@@ -522,15 +522,29 @@ public interface RIIF2Listener extends ParseTreeListener {
 	 */
 	void exitAisDeclaratorId(RIIF2Parser.AisDeclaratorIdContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link RIIF2Parser#primitiveId}.
+	 * Enter a parse tree produced by the {@code primitiveIdId}
+	 * labeled alternative in {@link RIIF2Parser#primitiveId}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrimitiveId(RIIF2Parser.PrimitiveIdContext ctx);
+	void enterPrimitiveIdId(RIIF2Parser.PrimitiveIdIdContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link RIIF2Parser#primitiveId}.
+	 * Exit a parse tree produced by the {@code primitiveIdId}
+	 * labeled alternative in {@link RIIF2Parser#primitiveId}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrimitiveId(RIIF2Parser.PrimitiveIdContext ctx);
+	void exitPrimitiveIdId(RIIF2Parser.PrimitiveIdIdContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code primitiveIdIdentifier}
+	 * labeled alternative in {@link RIIF2Parser#primitiveId}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimitiveIdIdentifier(RIIF2Parser.PrimitiveIdIdentifierContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code primitiveIdIdentifier}
+	 * labeled alternative in {@link RIIF2Parser#primitiveId}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimitiveIdIdentifier(RIIF2Parser.PrimitiveIdIdentifierContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link RIIF2Parser#associativeId}.
 	 * @param ctx the parse tree

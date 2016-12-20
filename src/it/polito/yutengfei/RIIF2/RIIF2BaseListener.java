@@ -616,13 +616,25 @@ public class RIIF2BaseListener implements RIIF2Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPrimitiveId(RIIF2Parser.PrimitiveIdContext ctx) { }
+	@Override public void enterPrimitiveIdId(RIIF2Parser.PrimitiveIdIdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPrimitiveId(RIIF2Parser.PrimitiveIdContext ctx) { }
+	@Override public void exitPrimitiveIdId(RIIF2Parser.PrimitiveIdIdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrimitiveIdIdentifier(RIIF2Parser.PrimitiveIdIdentifierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrimitiveIdIdentifier(RIIF2Parser.PrimitiveIdIdentifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

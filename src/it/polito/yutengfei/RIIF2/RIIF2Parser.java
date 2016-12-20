@@ -3216,25 +3216,50 @@ public class RIIF2Parser extends Parser {
 	}
 
 	public static class PrimitiveIdContext extends ParserRuleContext {
-		public TerminalNode Identifier() { return getToken(RIIF2Parser.Identifier, 0); }
-		public PrimitiveIdContext primitiveId() {
-			return getRuleContext(PrimitiveIdContext.class,0);
-		}
 		public PrimitiveIdContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_primitiveId; }
+	 
+		public PrimitiveIdContext() { }
+		public void copyFrom(PrimitiveIdContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class PrimitiveIdIdContext extends PrimitiveIdContext {
+		public PrimitiveIdContext primitiveId() {
+			return getRuleContext(PrimitiveIdContext.class,0);
+		}
+		public TerminalNode Identifier() { return getToken(RIIF2Parser.Identifier, 0); }
+		public PrimitiveIdIdContext(PrimitiveIdContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).enterPrimitiveId(this);
+			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).enterPrimitiveIdId(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimitiveId(this);
+			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimitiveIdId(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimitiveId(this);
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimitiveIdId(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class PrimitiveIdIdentifierContext extends PrimitiveIdContext {
+		public TerminalNode Identifier() { return getToken(RIIF2Parser.Identifier, 0); }
+		public PrimitiveIdIdentifierContext(PrimitiveIdContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).enterPrimitiveIdIdentifier(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof RIIF2Listener ) ((RIIF2Listener)listener).exitPrimitiveIdIdentifier(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RIIF2Visitor ) return ((RIIF2Visitor<? extends T>)visitor).visitPrimitiveIdIdentifier(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3255,6 +3280,10 @@ public class RIIF2Parser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
+			_localctx = new PrimitiveIdIdentifierContext(_localctx);
+			_ctx = _localctx;
+			_prevctx = _localctx;
+
 			setState(439);
 			match(Identifier);
 			}
@@ -3268,7 +3297,7 @@ public class RIIF2Parser extends Parser {
 					_prevctx = _localctx;
 					{
 					{
-					_localctx = new PrimitiveIdContext(_parentctx, _parentState);
+					_localctx = new PrimitiveIdIdContext(new PrimitiveIdContext(_parentctx, _parentState));
 					pushNewRecursionContext(_localctx, _startState, RULE_primitiveId);
 					setState(441);
 					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");

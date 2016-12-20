@@ -251,8 +251,8 @@ aisDeclaratorId
     ;
 
 primitiveId
-    : Identifier
-    | primitiveId ( '.' Identifier )
+    : Identifier #primitiveIdIdentifier
+    | primitiveId ( '.' Identifier ) #primitiveIdIdx
     ;
 
 associativeId

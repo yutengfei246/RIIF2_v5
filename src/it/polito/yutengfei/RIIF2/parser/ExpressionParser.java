@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
 
-class ExpressionParser extends RIIF2BaseListener {
+abstract class ExpressionParser extends RIIF2BaseListener {
 
     private ParseTreeProperty<Expression> expTree = new ParseTreeProperty<>();
 
